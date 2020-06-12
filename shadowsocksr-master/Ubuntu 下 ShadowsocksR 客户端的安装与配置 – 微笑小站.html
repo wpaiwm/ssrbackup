@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<!-- saved from url=(0028)https://www.wx-smile.com/128 -->
+<html lang="zh-CN" style="transform: none;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover">
+<title>Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站</title>
+<meta name="keywords" content="Linux">
+<meta name="description" content="SSR + Polipo 的安装及配置">
+<link rel="dns-prefetch" href="https://www.wx-smile.com/">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="微笑小站 » Feed" href="https://www.wx-smile.com/feed">
+<link rel="alternate" type="application/rss+xml" title="微笑小站 » 评论Feed" href="https://www.wx-smile.com/comments/feed">
+<script type="text/javascript" async="" src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/analytics.js"></script><script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.wx-smile.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.2.7"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/wp-emoji-release.min.js" type="text/javascript" defer=""></script><style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="wp-block-library-css" href="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/style.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="aphsh-prism-css-css" href="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/aphph-prism-1571297791.css" type="text/css" media="all">
+<link rel="stylesheet" id="smartideo_css-css" href="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/smartideo.css" type="text/css" media="screen">
+<link rel="stylesheet" id="dlm-frontend-css" href="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/frontend.css" type="text/css" media="all">
+<link rel="stylesheet" id="jimu-css-css" href="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/jimu.css" type="text/css" media="all">
+<link rel="stylesheet" id="ncLightgalleryCss-css" href="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/lightgallery.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="nicetheme-iconfont-css" href="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/iconfont.css" type="text/css" media="all">
+<link rel="stylesheet" id="nicetheme-nicetheme-css" href="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/nicetheme.css" type="text/css" media="all">
+<link rel="stylesheet" id="nicetheme-style-css" href="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/style.css" type="text/css" media="all">
+<script type="text/javascript" src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/aphph-prism-1571297791.js"></script><script type="text/javascript">
+/* <![CDATA[ */
+var globals = {"ajax_url":"https:\/\/www.wx-smile.com\/wp-admin\/admin-ajax.php","url_theme":"https:\/\/www.wx-smile.com\/wp-content\/themes\/Cosy3.2.1","site_url":"https:\/\/www.wx-smile.com","post_id":"128","comment_ip":"0","allow_switch_darkmode":"manual","posts_per_page":"10"};
+var __cosy__ = {"load_more":"\u52a0\u8f7d\u66f4\u591a","reached_the_end":"\u6ca1\u6709\u66f4\u591a\u5185\u5bb9","thank_you":"\u8c22\u8c22\u70b9\u8d5e","success":"\u64cd\u4f5c\u6210\u529f","cancelled":"\u53d6\u6d88\u70b9\u8d5e"};
+var toc = {"tag":"2"};
+var contribute = {"markdown":"1","image_resize":"1","image_drop":"1","magic_url":"1","emoji":"0","__":{"unsaved":"\u4ecd\u6709\u5185\u5bb9\u672a\u4fdd\u5b58\uff0c\u60a8\u786e\u5b9a\u8981\u5173\u95ed\u5417\uff1f","title_empty":"\u6587\u7ae0\u6807\u9898\u4e0d\u80fd\u4e3a\u7a7a\uff01","content_empty":"\u6587\u7ae0\u5185\u5bb9\u4e0d\u80fd\u4e3a\u7a7a\uff01","invalid_email":"\u8bf7\u586b\u5199\u6b63\u786e\u7684\u90ae\u7bb1","word_count":"\u603b\u5b57\u6570\uff1a","max_size":"\u4ec5\u5141\u8bb8\u4e0a\u4f20\u56fe\u7247\u6587\u4ef6\u4e14\u5927\u5c0f\u4e0d\u8d85\u8fc7 2M\uff01","type_something":"\u6211\u8981\u5199\u70b9\u4ec0\u4e48\u2026","submit":"\u63d0\u4ea4\u7a3f\u4ef6","draft":"\u4fdd\u5b58\u8349\u7a3f","one_cat":"\u81f3\u5c11\u9009\u62e9\u4e00\u4e2a\u5206\u7c7b\uff01","three_cat":"\u6700\u591a\u9009\u62e9\u4e09\u4e2a\u5206\u7c7b\uff01","required":"\u8bf7\u586b\u5199\u5b8c\u6574\u7248\u6743\u8bf4\u660e"}};
+/* ]]> */
+</script><script type="text/javascript" src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/jquery.js"></script><script type="text/javascript" src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/jquery-migrate.min.js"></script><link rel="canonical" href="https://www.wx-smile.com/128">
+<link rel="alternate" type="application/json+oembed" href="https://www.wx-smile.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.wx-smile.com%2F128">
+<link rel="alternate" type="text/xml+oembed" href="https://www.wx-smile.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.wx-smile.com%2F128&amp;format=xml">
+<!-- Global site tag (gtag.js) - Google Analytics --><script async="" src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/js"></script><script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-125820657-1');
+</script><link rel="pingback" href="https://www.wx-smile.com/xmlrpc.php">
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style id="theia-sticky-sidebar-stylesheet-TSS">.theiaStickySidebar:after {content: ""; display: table; clear: both;}</style></head>
+<body class="post-template-default single single-post postid-128 single-format-standard wp-embed-responsive  nice-style-border  nice-style-hover " style="transform: none;">
+	<header class="header">
+<nav class="navbar navbar-expand-md  "><div class="container">
+				<!-- / brand -->
+				<a href="https://www.wx-smile.com/" rel="home" class="navbar-brand m-0 order-1">
+					<img class="logo loaded" src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/largelogo.png" alt="微笑小站" data-src="https://www.wx-smile.com/wp-content/uploads/2019/03/largelogo.png" data-nclazyload="true" data-was-processed="true"><img class="logo logo-night" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="微笑小站" data-src="https://www.wx-smile.com/wp-content/uploads/2019/03/largelogo.png" data-nclazyload="true"></a>
+				<!-- brand -->
+				<ul class="nav main-submenu align-items-center flex-row flex-shrink-0 order-2 order-md-3">
+<li class="nav-item d-none d-lg-inline-block">
+						<a href="javascript:" class="nice-tooltip-hide switch-dark-mode nav-link  text-lg" data-toggle="nicetooltip" data-placement="bottom" title="" data-original-title="深色模式">
+							<i class="night iconfont icon-moon_circle"></i>
+							<i class="light text-warning iconfont icon-moon_circle_fill"></i>
+						</a>
+					</li>
+									<li class="nav-item">
+						<a href="javascript:" class="nice-tooltip-hide nav-link search-popup text-lg" data-toggle="nicetooltip" data-placement="bottom" title="" data-original-title="搜索"><i class="d-block iconfont icon-search"></i></a>
+					</li>
+										<li class="nav-item d-lg-none">
+						<a href="javascript:" id="mobile-sidebar-trigger" class="nav-link text-lg"><i class="d-block iconfont icon-menu"></i></a>
+					</li>
+					        <li class="nav-item d-none d-lg-inline-block">
+        <a href="https://www.wx-smile.com/%e5%89%8d%e7%ab%af%e6%8a%95%e7%a8%bf" target="_blank" class="nav-link text-lg" data-toggle="nicetooltip" data-placement="bottom" title="" data-original-title="我要投稿"><i class="d-block iconfont icon-bianji"></i></a>
+    </li>
+                        <li class="nav-item ml-3">
+                <a class="btn btn-light btn-sm" href="https://www.wx-smile.com/%e7%99%bb%e5%bd%95-%e6%b3%a8%e5%86%8c/user/register">注册</a>
+            </li>
+            <li class="nav-item ml-1">
+                <a class="btn btn-light btn-sm" href="https://www.wx-smile.com/%e7%99%bb%e5%bd%95-%e6%b3%a8%e5%86%8c/user/login">登录</a>
+            </li>
+            				</ul>
+<div class="collapse navbar-collapse show navbar-scroll order-3 order-md-2 mx-md-4">
+					<ul class="navbar-nav main-menu d-none d-lg-flex mr-auto px-4">
+<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-32"><a href="https://www.wx-smile.com/%e4%b8%93%e9%a2%98">专题</a></li>
+<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-33"><a href="https://www.wx-smile.com/%e5%8f%8b%e9%93%be">友链</a></li>
+<li id="menu-item-118" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-118"><a href="http://nav.wx-smile.com/">WebStack</a></li>
+<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-34"><a href="https://www.wx-smile.com/%e7%95%99%e8%a8%80%e6%9d%bf">留言板</a></li>
+					</ul>
+</div>
+				
+			</div>
+
+		</nav></header><main class="py-3 py-md-4 py-lg-5" style="transform: none;"><div class="container" style="transform: none;">
+        <div class="d-none d-md-block breadcrumbs mb-2 mb-md-3">
+<span itemprop="itemListElement"><a href="https://www.wx-smile.com/" itemprop="item" class="home"><span itemprop="name" class="text-muted">首页</span></a></span> <span class="sep text-muted">›</span> <span itemprop="itemListElement"><a href="https://www.wx-smile.com/category/linux" itemprop="item"><span itemprop="name" class="text-muted">Linux</span></a></span> <span class="sep text-muted">›</span> <span class="current">Ubuntu 下 ShadowsocksR 客户端的安装与配置</span>
+</div>        <div class="row" style="transform: none;">
+            <div class="col-12 col-lg-9">
+                <div class="post">
+                                        <div class="post-poster rounded mb-4">
+                        <div class="media media-3x1">
+                            <div class="media-content" style="background-image: url(&quot;https://www.wx-smile.com/wp-content/themes/Cosy3.2.1/timthumb.php?src=https://www.wx-smile.com/wp-content/uploads/2019/03/ssrmu.png&amp;h=300&amp;w=900&amp;zc=1&amp;a=c&amp;q=100&amp;s=1&quot;);" data-bg="url(&#39;https://www.wx-smile.com/wp-content/themes/Cosy3.2.1/timthumb.php?src=https://www.wx-smile.com/wp-content/uploads/2019/03/ssrmu.png&amp;h=300&amp;w=900&amp;zc=1&amp;a=c&amp;q=100&amp;s=1&#39;)" data-nclazyload="true" data-was-processed="true"></div>
+                        </div>
+                    </div>
+                                        <h1 class="post-title h3">Ubuntu 下 ShadowsocksR 客户端的安装与配置</h1>
+                    <div class="post-meta d-flex align-items-center flex-row text-muted mt-3 mt-md-3 mb-3 mb-lg-4">
+    <div class="d-flex flex-fill align-items-center">
+        <div class="author-popup  flex-avatar w-40">
+            <img alt="" src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/9eebe35c3a3321d3411b3273315e0a8f.jpeg" class="avatar avatar-40 photo w-40 loaded" height="40" width="40" data-src="//gravatar.loli.net/avatar/9eebe35c3a3321d3411b3273315e0a8f?s=40&amp;d=https%3A%2F%2Fwww.wx-smile.com%2Fwp-content%2Fuploads%2F2019%2F03%2F10494461955382E375EA8457EBC3CF7B96576BB4BF.jpg&amp;r=g" data-nclazyload="true" data-srcset="//gravatar.loli.net/avatar/9eebe35c3a3321d3411b3273315e0a8f?s=80&amp;d=https%3A%2F%2Fwww.wx-smile.com%2Fwp-content%2Fuploads%2F2019%2F03%2F10494461955382E375EA8457EBC3CF7B96576BB4BF.jpg&amp;r=g 2x" srcset="//gravatar.loli.net/avatar/9eebe35c3a3321d3411b3273315e0a8f?s=80&amp;d=https%3A%2F%2Fwww.wx-smile.com%2Fwp-content%2Fuploads%2F2019%2F03%2F10494461955382E375EA8457EBC3CF7B96576BB4BF.jpg&amp;r=g 2x" data-was-processed="true"><span class="avatar-status avatar-bottom"><span class="badge badge-pill badge-info font-theme text-xs mx-1">Lv.1</span></span>        </div>
+        <div class="author-name d-flex flex-wrap flex-column mx-2 mx-md-3">
+            <div class="text-md"><a href="javascript:" class="author-popup">微笑 <i class="cut"></i><span class="badge badge-rank badge-primary text-xs mx-1">Administrator</span></a></div>
+            <div class="text-xs text-muted">
+                <time class="date mr-1">1年前</time><i class="d-none d-md-inline-block">发布在</i> <a class="text-secondary" href="https://www.wx-smile.com/category/linux" rel="category tag" target="_blank">Linux</a>            </div>
+        </div>
+    </div>
+    <div class="post-data d-none d-md-flex text-nowrap text-md ">
+                <span class="mx-1 mx-md-2">
+            <i class="text-lg iconfont icon-view"></i>
+            <small class="text-font">8,510</small>
+        </span>
+                        <span class="mx-1 mx-md-2">
+            <a href="https://www.wx-smile.com/128#comments">
+                <i class="text-lg iconfont icon-Chat4"></i>
+                <small class="text-font">9</small>
+            </a>
+        </span>
+                        <span class="mx-1 mx-md-2">
+                        <a class=" btn-action-like" href="javascript:;" data-action="like" data-id="128">
+                <i class="text-lg iconfont icon-like-line"></i>
+                <small class="like-count text-font">12</small>
+            </a>
+        </span>
+            </div>
+</div>                    <div class="border-top py-2 py-md-2"></div>
+                    <div class="post-content" data-spy="scroll" data-target="#list-example" data-offset="0">
+                                                <div class="nc-light-gallery">
+<h2 id="scroll-0">安装 SSR 脚本</h2>
+<pre class="aphph-container line-numbers language-bash"><code class=" language-bash"><span class="token function">wget</span> <a class="token url-link" href="https://wx-smile.com/ssr">https://wx-smile.com/ssr</a>
+<span class="token function">sudo</span> <span class="token function">mv</span> ssr /usr/local/bin
+<span class="token function">sudo</span> <span class="token function">chmod</span> <span class="token number">766</span> /usr/local/bin/ssr
+ssr <span class="token function">install</span>
+ssr config<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>最后一步的 config 默认用 vim 打开，不会用 vim 的可以尝试 gedit。</p>
+<pre class="aphph-container line-numbers language-bash"><code class=" language-bash"><span class="token function">sudo</span> gedit /usr/local/share/shadowsocksr/config.json <span class="token comment">#具体位置按实际安装位置填写</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>然后填写服务器的相关信息，保存</p>
+<pre class="aphph-container line-numbers language-bash"><code class=" language-bash"><span class="token string">"server"</span><span class="token builtin class-name">:</span> <span class="token string">"0.0.0.0"</span>,  <span class="token comment"># 服务器地址  对于ss:ping+域名，得到地址。</span>
+<span class="token string">"server_port"</span><span class="token builtin class-name">:</span> <span class="token number">80890</span>,    <span class="token comment"># 端口</span>
+<span class="token string">"password"</span><span class="token builtin class-name">:</span> <span class="token string">" "</span>,    <span class="token comment"># 密码</span>
+<span class="token string">"method"</span><span class="token builtin class-name">:</span> <span class="token string">"chacha20"</span>,      <span class="token comment"># 加密方式</span>
+<span class="token string">"protocol"</span><span class="token builtin class-name">:</span> <span class="token string">"auth_sha1_v4"</span>,  <span class="token comment"># 协议插件</span>
+<span class="token string">"obfs"</span><span class="token builtin class-name">:</span> <span class="token string">"http_simple"</span>,    <span class="token comment"># 混淆插件</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="aphph-container line-numbers language-bash"><code class=" language-bash"><span class="token comment"># 停止</span>
+ssr stop
+<span class="token comment"># 启动</span>
+ssr start<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="scroll-1">使用 PAC</h2>
+<h3>安装 <code>pip</code>
+</h3>
+<pre class="aphph-container line-numbers language-bash"><code class=" language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> python-pip
+pip <span class="token function">install</span> --upgrade pip<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3>安装 <code>GenPAC</code>
+</h3>
+<p>GenPAC 是基于 gfwlist 的代理自动配置文件 (Proxy-Auto-Config, PAC) 生成工具，具体的自定义规则可以前往&nbsp;<a href="https://github.com/JinnLynn/genpac">GenPAC: Github</a></p>
+<pre class="aphph-container line-numbers language-bash"><code class=" language-bash"><span class="token function">sudo</span> pip <span class="token function">install</span> setuptools
+<span class="token function">sudo</span> pip <span class="token function">install</span> genpac
+pip <span class="token function">install</span> --upgrade genpac<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3>生成 gfwlist</h3>
+<p>–output 处填写生成的 .pac 储存位置</p>
+<pre><code>genpac --format=pac --pac-proxy="SOCKS5 127.0.0.1:1080" --gfwlist-proxy="SOCKS5 127.0.0.1:1080" --output="home/xxx/pac/autoproxy.pac"</code></pre>
+<h2 id="scroll-2">设置全局网络</h2>
+<p>打开 <code>system settings-&gt;network-&gt;network proxy</code> : <code>Method:Automatic</code></p>
+<p>url 指向生成的 pac 文件位置，如 <code>file:///smile/home/pac/autoproxy.pac</code> 自行查找加入即可</p>
+<p><strong>然后你就可以享受正常的网络服务了！</strong></p>
+<h2 id="scroll-3">转换HTTP代理</h2>
+<p>注意：如果你只使用网页访问的话则可以跳过此步骤，若要使用终端等连接，则需要执行此步骤。</p>
+<p>Shadowsocks 默认是用&nbsp;<code>Socks5</code> 协议的，对于 Terminal 的 get,&nbsp;wget 等走 http 协议的地方是无能为力的，所以需要转换成 http 代理，加强通用性，这里使用的转换方法是基于 <code>Polipo</code> 的。</p>
+<pre class="aphph-container line-numbers language-bash"><code class=" language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> polipo      <span class="token comment"># 安装Polipo</span>
+<span class="token function">sudo</span> gedit /etc/polipo/config    <span class="token comment"># 修改配置文件</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>将下面的内容整个替换到文件中并保存：(最后一行的端口可自行定义)</p>
+<pre class="aphph-container line-numbers language-bash"><code class=" language-bash"><span class="token comment"># This file only needs to list configuration variables that deviate</span>
+<span class="token comment"># from the default values. See /usr/share/doc/polipo/examples/config.sample</span>
+<span class="token comment"># and "polipo -v" for variables you can tweak and further information.</span>
+logSyslog <span class="token operator">=</span> <span class="token boolean">false</span>
+logFile <span class="token operator">=</span> <span class="token string">"/var/log/polipo/polipo.log"</span>
+
+socksParentProxy <span class="token operator">=</span> <span class="token string">"127.0.0.1:1080"</span>
+socksProxyType <span class="token operator">=</span> socks5
+
+chunkHighMark <span class="token operator">=</span> <span class="token number">50331648</span>
+objectHighMark <span class="token operator">=</span> <span class="token number">16384</span>
+
+serverMaxSlots <span class="token operator">=</span> <span class="token number">64</span>
+serverSlots <span class="token operator">=</span> <span class="token number">16</span>
+serverSlots1 <span class="token operator">=</span> <span class="token number">32</span>
+
+proxyAddress <span class="token operator">=</span> <span class="token string">"0.0.0.0"</span>
+proxyPort <span class="token operator">=</span> <span class="token number">8123</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>重启 Polipo:</p>
+<pre class="aphph-container line-numbers language-bash"><code class=" language-bash">/etc/init.d/polipo restart<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3>验证代理是否正常工作</h3>
+<pre class="aphph-container line-numbers language-bash"><code class=" language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">http_proxy</span><span class="token operator">=</span><span class="token string">"<a class="token url-link" href="http://127.0.0.1:8123/">http://127.0.0.1:8123/</a>"</span>
+<span class="token function">curl</span> www.google.com<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>如果正常，就会返回抓取到的 Google 网页内容。此时，终端里面可以访问外网了。 另外，在浏览器中输入 http://127.0.0.1:8123/ 便可以进入到 Polipo 的使用说明和配置界面。</p>
+<h3>使用方法</h3>
+<h4>仅为当前命令设置代理(推荐)</h4>
+<p>在命令前加入 <code>http_proxy="http://127.0.0.1:8123/"</code> 或 <code>http_proxy="http://localhost:8123/"</code><br>
+例如 <code>http_proxy="http://127.0.0.1:8123/" curl ip.gs</code></p>
+<p>为了方便，可以加入<strong>别名</strong><br>
+在 <code>~/.bashrc</code> 中加入</p>
+<pre class="aphph-container line-numbers language-bash"><code class=" language-bash"><span class="token builtin class-name">alias</span> <span class="token assign-left variable">hp</span><span class="token operator">=</span><span class="token string">"http_proxy=<a class="token url-link" href="http://127.0.0.1:8123/">http://127.0.0.1:8123/</a>"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>在执行命令时，在需要代理的命令前加入 hp 即可，如 <code>hp curl ip.gs</code></p>
+<h4>仅为当前会话设置代理</h4>
+<p><code>export http_proxy="http://127.0.0.1:8123/"</code></p>
+<h4>直接全局代理(不推荐)</h4>
+<p>在 <code>/etc/profile</code> 中加入</p>
+<pre class="aphph-container line-numbers language-bash"><code class=" language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">http_proxy</span><span class="token operator">=</span><span class="token string">"<a class="token url-link" href="http://127.0.0.1:8123/">http://127.0.0.1:8123/</a>"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这样每次使用终端时默认走代理</p>
+<h2 id="scroll-4">每次开机时运行</h2>
+<p>Mac 和 Windows 都要手动开启，那我们也在需要的时候开启就好了。<br>
+如果未关闭 SSR 关闭终端或者关机有可能出现无法连接网络的情况，重新开启 SSR 再关闭即可。</p>
+<p style="font-size: 12px;">参考文章<br><a href="https://www.jianshu.com/p/a0f3268bfa33">Ubuntu 16.04 + SSR翻墙</a><br><a href="https://blog.csdn.net/qq_36764147/article/details/81335966">ubuntu使用shadowsocksR设置全局代理</a></p>
+</div>                                            </div>
+                                        
+            <div class="post-declare mt-3 mt-md-4">
+            <p>本文系作者 @<a href="https://www.wx-smile.com/author/smile" title="由微笑 &lt;i class=&quot;cut&quot;&gt;&lt;/i&gt;&lt;span class=&quot;badge badge-rank badge-primary text-xs mx-1&quot;&gt;Administrator&lt;/span&gt;发布" rel="author">微笑 <i class="cut"></i><span class="badge badge-rank badge-primary text-xs mx-1">Administrator</span></a> 原创发布在 微笑小站。未经许可，禁止转载。</p>
+        </div>
+                                <div class="post-tags mt-3 mt-md-4 mx-n1"><span class="d-inline-block p-1"><span class="btn btn-light btn-sm">#<a href="https://www.wx-smile.com/tag/linux" rel="tag">Linux</a>#</span></span></div>
+<div id="post-action" class="post-action mt-3 mt-lg-5">
+    <div class="hr-short"></div>
+    <div class="d-flex flex-fill align-items-center">
+        <div class="d-none d-md-block">
+                                            <a href="javascript:" data-action="like" data-id="128" class="d-inline-block btn-action-like  mr-2 mr-md-3 mr-lg-4">
+                                        <i class="text-xl iconfont icon-like"></i>
+                    <span class="like-count text-font align-middle">12</span>
+                </a>
+                                        <a href="javascript:;" data-id="128" data-nonce="7c7659cd45" class="d-inline-block apollo-collection  mr-2 mr-md-3 mr-lg-4">
+                    <i class="text-xl iconfont icon-star-filled"></i>
+                    <span class="collection-count text-font align-middle"></span>
+                </a>
+                                        <a href="javascript:;" id="btn-bigger-cover" class="d-inline-block " data-id="128">
+                    <i class="text-xl iconfont icon-picture1"></i>
+                </a>
+                    </div>
+        <div class="flex-md-fill"></div>
+                    <div id="scrollshare" class="post-social">
+                                <a href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.wx-smile.com%2F128&amp;type=button&amp;language=zh_cn&amp;title=%E3%80%90Ubuntu+%E4%B8%8B+ShadowsocksR+%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E3%80%91SSR+%2B+Polipo+%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE%0A...&amp;searchPic=true" target="_blank" class="btn btn-light btn-icon btn-weibo btn-rounded btn-md m-1"><span><i class="iconfont icon-weibo"></i></span></a>
+                <a href="javascript:" class="btn btn-light btn-icon btn-weixin single-popup btn-rounded btn-md m-1" data-img="https://www.wx-smile.com/wp-content/themes/Cosy3.2.1/modules/qrcode.php?data=https%3A%2F%2Fwww.wx-smile.com%2F128" data-title="微信扫一扫 分享朋友圈" data-desc="在微信内长按二维码"><span><i class="iconfont icon-weixin1"></i></span></a>
+                <a href="https://connect.qq.com/widget/shareqq/index.html?url=https%3A%2F%2Fwww.wx-smile.com%2F128&amp;title=Ubuntu+%E4%B8%8B+ShadowsocksR+%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE&amp;summary=SSR+%2B+Polipo+%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE%0A..." target="_blank" class="btn btn-light btn-icon btn-qq btn-rounded btn-md m-1"><span><i class="iconfont icon-qq"></i></span></a>
+                                                <a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.wx-smile.com%2F128" target="_blank" class="btn btn-light btn-icon btn-facebook btn-rounded btn-md m-1"><span><i class="iconfont icon-facebook"></i></span></a>
+                <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.wx-smile.com%2F128" target="_blank" class="btn btn-light btn-icon btn-twitter btn-rounded btn-md m-1"><span><i class="iconfont icon-twitter"></i></span></a>
+                <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fwww.wx-smile.com%2F128&amp;title=Ubuntu+%E4%B8%8B+ShadowsocksR+%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE&amp;summary=SSR+%2B+Polipo+%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE%0A..." target="_blank" class="btn btn-light btn-icon btn-linkedin btn-rounded btn-md m-1"><span><i class="iconfont icon-linkedin"></i></span></a>
+                            </div>
+        </div>
+</div>
+
+
+                     <div class="post-next-prev list-grouped row-sm my-n1 pt-5">
+            <div class="col-12 col-md-6 py-1">
+        <div class="list-item list-overlay block custom-hover overlay-hover">
+            <div class="media media-3x1">
+                <div class="media-content" style="background-image: url(&quot;https://www.wx-smile.com/wp-content/themes/Cosy3.2.1/timthumb.php?src=https://www.wx-smile.com/wp-content/uploads/2019/02/writeup-logo.png&amp;h=300&amp;w=450&amp;zc=1&amp;a=c&amp;q=100&amp;s=1&quot;);" data-bg=" url(&#39;https://www.wx-smile.com/wp-content/themes/Cosy3.2.1/timthumb.php?src=https://www.wx-smile.com/wp-content/uploads/2019/02/writeup-logo.png&amp;h=300&amp;w=450&amp;zc=1&amp;a=c&amp;q=100&amp;s=1&#39;)" data-nclazyload="true" data-was-processed="true"><div class="overlay-1"></div></div>
+            </div>
+            <a href="https://www.wx-smile.com/104" class="list-content p-3" title="WeChall PHP Writeup">
+                <div class="list-body ">
+                    <div class="list-title">
+                        <div class="h-2x h6 text-white">
+                            WeChall PHP Writeup                        </div>
+                    </div>
+                </div>
+                <div class="list-footer">
+                    <div class="d-flex align-items-center flex-fill">
+                        <div class="text-xs text-muted">上一篇</div>
+                        <div class="flex-fill"></div>
+                        <i class="text-md iconfont icon-xianghou"></i>
+                    </div>
+                    
+                </div>
+            </a>
+        </div>
+    </div>
+            <div class="col-12 col-md-6 py-1">
+        <div class="list-item list-overlay block custom-hover overlay-hover">
+            <div class="media media-3x1">
+                <div class="media-content" style="background-image: url(&quot;https://www.wx-smile.com/wp-content/themes/Cosy3.2.1/timthumb.php?src=https://www.wx-smile.com/wp-content/uploads/2019/02/wordpress.png&amp;h=300&amp;w=450&amp;zc=1&amp;a=c&amp;q=100&amp;s=1&quot;);" data-bg=" url(&#39;https://www.wx-smile.com/wp-content/themes/Cosy3.2.1/timthumb.php?src=https://www.wx-smile.com/wp-content/uploads/2019/02/wordpress.png&amp;h=300&amp;w=450&amp;zc=1&amp;a=c&amp;q=100&amp;s=1&#39;)" data-nclazyload="true" data-was-processed="true"><div class="overlay-1"></div></div>
+            </div>
+            <a href="https://www.wx-smile.com/143" class="list-content p-3" title="WordPress 添加文章随机推荐功能">
+                <div class="list-body ">
+                    <div class="list-title">
+                        <div class="h-2x h6 text-white">
+                            WordPress 添加文章随机推荐功能                        </div>
+                    </div>
+                </div>
+                <div class="list-footer">
+                    <div class="d-flex align-items-center flex-fill">
+                        <div class="text-xs text-muted">下一篇</div>
+                        <div class="flex-fill"></div>
+                        <i class="text-md iconfont icon-xianghou"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    </div>
+                </div>
+                	<div id="comments" class="comments mt-5">
+		<div class="h5 mb-4">
+			<i class="text-xl text-primary iconfont icon-Chat4 mr-1"></i><span class="d-inline-block align-middle">评论 <small class="text-font text-sm">(9)</small></span>
+		</div>
+			<div id="respond" class="comment-respond">
+							<form method="post" action="https://www.wx-smile.com/wp-comments-post.php" id="commentform" class="comment-form">
+					<div class="d-flex w-100">
+						<div class="comment-avatar-author flex-avatar w-48 mr-2">
+							<img src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/10494461955382E375EA8457EBC3CF7B96576BB4BF.jpg" class="avatar w-48 loaded" data-src="https://www.wx-smile.com/wp-content/uploads/2019/03/10494461955382E375EA8457EBC3CF7B96576BB4BF.jpg" data-nclazyload="true" data-was-processed="true">
+</div>
+						<div class="flex-fill comment-from-author">
+																						<div class="comment-form-info">
+									<div class="row row-sm mb-2 mb-lg-3">
+										<div class="col py-1 py-lg-0">
+											<div class="form-group comment-form-author m-0">
+												<input class="form-control" id="author" placeholder="昵称" name="author" type="text" value="" required="required">
+</div>
+										</div>
+										<div class="col-12 col-lg-4 py-1 py-lg-0">
+											<div class="form-group comment-form-email m-0">
+												<input id="email" class="form-control" name="email" placeholder="Email" type="email" value="">
+</div>
+										</div>
+										<div class="col-12 col-lg-4 py-1 py-lg-0">
+											<div class="form-group comment-form-url m-0">
+												<input class="form-control" placeholder="网站地址" id="url" name="url" type="url" value="">
+</div>
+										</div>
+									</div>
+								</div>
+														<div class="comment-form-text">
+								<div class="form-group comment-textarea mb-3">
+									<textarea id="comment" name="comment" class="form-control form-control-sm" rows="3"></textarea>
+</div>
+								<div class="form-submit text-right">
+									<a rel="nofollow" id="cancel-comment-reply-link" style="display: none" class="btn btn-light mr-2" href="javascript:;">再想想</a>
+									<input name="submit" type="submit" id="submit" class="btn btn-primary " value="发布评论"><input type="hidden" name="comment_post_ID" value="128" id="comment_post_ID"><input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</div>
+							</div>
+						</div>
+					</div>
+				</form>
+					</div>
+		<ul class="comment-list">
+<li id="comment-5" class="comment even thread-even depth-1">
+    <article id="div-comment-5" class="d-flex flex-fill comment-body mt-4"><div class="comment-avatar-author flex-avatar w-48 mr-2 ">
+            <img alt="" src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/b2d7d2d13aed54c2ed7feb538b382b42" class="avatar avatar-48 photo loaded" height="48" width="48" data-src="//gravatar.loli.net/avatar/b2d7d2d13aed54c2ed7feb538b382b42?s=48&amp;d=https%3A%2F%2Fwww.wx-smile.com%2Fwp-content%2Fuploads%2F2019%2F03%2F10494461955382E375EA8457EBC3CF7B96576BB4BF.jpg&amp;r=g" data-nclazyload="true" data-srcset="//gravatar.loli.net/avatar/b2d7d2d13aed54c2ed7feb538b382b42?s=96&amp;d=https%3A%2F%2Fwww.wx-smile.com%2Fwp-content%2Fuploads%2F2019%2F03%2F10494461955382E375EA8457EBC3CF7B96576BB4BF.jpg&amp;r=g 2x" srcset="//gravatar.loli.net/avatar/b2d7d2d13aed54c2ed7feb538b382b42?s=96&amp;d=https%3A%2F%2Fwww.wx-smile.com%2Fwp-content%2Fuploads%2F2019%2F03%2F10494461955382E375EA8457EBC3CF7B96576BB4BF.jpg&amp;r=g 2x" data-was-processed="true">
+</div>
+<!-- .comment-author -->
+        <div class="flex-fill flex-column comment-text mt-1">
+            <div class="d-flex align-items-center comment-info mb-1">
+                <div class="comment-author text-sm">
+                	hhaa                </div>
+            </div>
+            <div class="comment-content d-inline-block text-sm">
+                <p>sudo: python：找不到命令<br>
+请问怎么解决？<br>
+已经安装了python3</p>
+                            </div>
+<!-- .comment-content -->
+            <div class="comment-footer">
+                <div class="d-flex flex-fill align-items-center ">
+                    <div class="text-xs text-muted">
+                        <time class="comment-date mr-2">9月前</time>
+</div>
+                    <div class="flex-fill"></div>
+                    <a class="comment-reply-link" onclick="return addComment.moveForm( &#39;comment-5&#39;,&#39;5&#39;, &#39;respond&#39;,&#39;128&#39; ) " href="https://www.wx-smile.com/128?replytocom=5#respond" rel="nofollow"><i class="text-md iconfont icon-xiaoxi"></i></a>
+                </div>
+            </div>
+            <div class="border-bottom border-light py-2"></div>
+        </div>
+<!-- .comment-text -->
+    </article><!-- .comment-body --><ul class="children"><li id="comment-6" class="comment odd alt depth-2">
+    <article id="div-comment-6" class="d-flex flex-fill comment-body mt-4"><div class="comment-avatar-author flex-avatar w-48 mr-2 ">
+            <img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="avatar avatar-48 photo" height="48" width="48" data-src="//gravatar.loli.net/avatar/b2d7d2d13aed54c2ed7feb538b382b42?s=48&amp;d=https%3A%2F%2Fwww.wx-smile.com%2Fwp-content%2Fuploads%2F2019%2F03%2F10494461955382E375EA8457EBC3CF7B96576BB4BF.jpg&amp;r=g" data-nclazyload="true" data-srcset="//gravatar.loli.net/avatar/b2d7d2d13aed54c2ed7feb538b382b42?s=96&amp;d=https%3A%2F%2Fwww.wx-smile.com%2Fwp-content%2Fuploads%2F2019%2F03%2F10494461955382E375EA8457EBC3CF7B96576BB4BF.jpg&amp;r=g 2x">
+</div>
+<!-- .comment-author -->
+        <div class="flex-fill flex-column comment-text mt-1">
+            <div class="d-flex align-items-center comment-info mb-1">
+                <div class="comment-author text-sm">
+                	hhaa                </div>
+            </div>
+            <div class="comment-content d-inline-block text-sm">
+                <p><a rel="nofollow" class="comment_at" href="https://www.wx-smile.com/128#comment-5">@hhaa：</a> 已经解决 谢谢博主的教程</p>
+                            </div>
+<!-- .comment-content -->
+            <div class="comment-footer">
+                <div class="d-flex flex-fill align-items-center ">
+                    <div class="text-xs text-muted">
+                        <time class="comment-date mr-2">9月前</time>
+</div>
+                    <div class="flex-fill"></div>
+                    <a class="comment-reply-link" onclick="return addComment.moveForm( &#39;comment-6&#39;,&#39;6&#39;, &#39;respond&#39;,&#39;128&#39; ) " href="https://www.wx-smile.com/128?replytocom=6#respond" rel="nofollow"><i class="text-md iconfont icon-xiaoxi"></i></a>
+                </div>
+            </div>
+            <div class="border-bottom border-light py-2"></div>
+        </div>
+<!-- .comment-text -->
+    </article><!-- .comment-body -->
+</li></ul>
+<!-- .children -->
+</li>
+<li id="comment-7" class="comment even thread-odd thread-alt depth-1">
+    <article id="div-comment-7" class="d-flex flex-fill comment-body mt-4"><div class="comment-avatar-author flex-avatar w-48 mr-2 ">
+            <img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="avatar avatar-48 photo" height="48" width="48" data-src="//gravatar.loli.net/avatar/9789b11b21dcf0dcfdeb713dd65e63d3?s=48&amp;d=https%3A%2F%2Fwww.wx-smile.com%2Fwp-content%2Fuploads%2F2019%2F03%2F10494461955382E375EA8457EBC3CF7B96576BB4BF.jpg&amp;r=g" data-nclazyload="true" data-srcset="//gravatar.loli.net/avatar/9789b11b21dcf0dcfdeb713dd65e63d3?s=96&amp;d=https%3A%2F%2Fwww.wx-smile.com%2Fwp-content%2Fuploads%2F2019%2F03%2F10494461955382E375EA8457EBC3CF7B96576BB4BF.jpg&amp;r=g 2x">
+</div>
+<!-- .comment-author -->
+        <div class="flex-fill flex-column comment-text mt-1">
+            <div class="d-flex align-items-center comment-info mb-1">
+                <div class="comment-author text-sm">
+                	<a target="_blank" href="https://www.yydashijian.com/" rel="external nofollow" class="url">征文网</a>                </div>
+            </div>
+            <div class="comment-content d-inline-block text-sm">
+                <p>运行ssr config后报错：sudo: python：找不到命令怎么高啊</p>
+                            </div>
+<!-- .comment-content -->
+            <div class="comment-footer">
+                <div class="d-flex flex-fill align-items-center ">
+                    <div class="text-xs text-muted">
+                        <time class="comment-date mr-2">9月前</time>
+</div>
+                    <div class="flex-fill"></div>
+                    <a class="comment-reply-link" onclick="return addComment.moveForm( &#39;comment-7&#39;,&#39;7&#39;, &#39;respond&#39;,&#39;128&#39; ) " href="https://www.wx-smile.com/128?replytocom=7#respond" rel="nofollow"><i class="text-md iconfont icon-xiaoxi"></i></a>
+                </div>
+            </div>
+            <div class="border-bottom border-light py-2"></div>
+        </div>
+<!-- .comment-text -->
+    </article><!-- .comment-body --><ul class="children">
+<li id="comment-10" class="comment byuser comment-author-smile bypostauthor odd alt depth-2">
+    <article id="div-comment-10" class="d-flex flex-fill comment-body mt-4"><div class="comment-avatar-author flex-avatar w-48 mr-2 ">
+            <img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="avatar avatar-48 photo" height="48" width="48" data-src="//gravatar.loli.net/avatar/9eebe35c3a3321d3411b3273315e0a8f?s=48&amp;d=https%3A%2F%2Fwww.wx-smile.com%2Fwp-content%2Fuploads%2F2019%2F03%2F10494461955382E375EA8457EBC3CF7B96576BB4BF.jpg&amp;r=g" data-nclazyload="true" data-srcset="//gravatar.loli.net/avatar/9eebe35c3a3321d3411b3273315e0a8f?s=96&amp;d=https%3A%2F%2Fwww.wx-smile.com%2Fwp-content%2Fuploads%2F2019%2F03%2F10494461955382E375EA8457EBC3CF7B96576BB4BF.jpg&amp;r=g 2x"><span class="avatar-status avatar-bottom"><span class="badge badge-pill badge-info font-theme text-xs mx-1">Lv.1</span></span>        </div>
+<!-- .comment-author -->
+        <div class="flex-fill flex-column comment-text mt-1">
+            <div class="d-flex align-items-center comment-info mb-1">
+                <div class="comment-author text-sm">
+                	微笑 <i class="cut"></i><span class="badge badge-rank badge-primary text-xs mx-1">Administrator</span>                </div>
+            </div>
+            <div class="comment-content d-inline-block text-sm">
+                <p><a rel="nofollow" class="comment_at" href="https://www.wx-smile.com/128#comment-7">@征文网：</a> 确定机器安装了Python? 没有的话就安装一下。</p>
+                            </div>
+<!-- .comment-content -->
+            <div class="comment-footer">
+                <div class="d-flex flex-fill align-items-center ">
+                    <div class="text-xs text-muted">
+                        <time class="comment-date mr-2">9月前</time>
+</div>
+                    <div class="flex-fill"></div>
+                    <a class="comment-reply-link" onclick="return addComment.moveForm( &#39;comment-10&#39;,&#39;10&#39;, &#39;respond&#39;,&#39;128&#39; ) " href="https://www.wx-smile.com/128?replytocom=10#respond" rel="nofollow"><i class="text-md iconfont icon-xiaoxi"></i></a>
+                </div>
+            </div>
+            <div class="border-bottom border-light py-2"></div>
+        </div>
+<!-- .comment-text -->
+    </article><!-- .comment-body -->
+</li>
+<li id="comment-11" class="comment even depth-2">
+    <article id="div-comment-11" class="d-flex flex-fill comment-body mt-4"><div class="comment-avatar-author flex-avatar w-48 mr-2 ">
+            <img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="avatar avatar-48 photo" height="48" width="48" data-src="//gravatar.loli.net/avatar/9789b11b21dcf0dcfdeb713dd65e63d3?s=48&amp;d=https%3A%2F%2Fwww.wx-smile.com%2Fwp-content%2Fuploads%2F2019%2F03%2F10494461955382E375EA8457EBC3CF7B96576BB4BF.jpg&amp;r=g" data-nclazyload="true" data-srcset="//gravatar.loli.net/avatar/9789b11b21dcf0dcfdeb713dd65e63d3?s=96&amp;d=https%3A%2F%2Fwww.wx-smile.com%2Fwp-content%2Fuploads%2F2019%2F03%2F10494461955382E375EA8457EBC3CF7B96576BB4BF.jpg&amp;r=g 2x">
+</div>
+<!-- .comment-author -->
+        <div class="flex-fill flex-column comment-text mt-1">
+            <div class="d-flex align-items-center comment-info mb-1">
+                <div class="comment-author text-sm">
+                	<a target="_blank" href="https://www.yydashijian.com/" rel="external nofollow" class="url">征文网</a>                </div>
+            </div>
+            <div class="comment-content d-inline-block text-sm">
+                <p><a rel="nofollow" class="comment_at" href="https://www.wx-smile.com/128#comment-10">@微笑 <i class="cut"></i><span class="badge badge-rank badge-primary text-xs mx-1">Administrator</span>：</a> 安装的Python3，不过我用搬瓦工一键SS解决了，可惜最新端口屏蔽太厉害了，没敢用了</p>
+                            </div>
+<!-- .comment-content -->
+            <div class="comment-footer">
+                <div class="d-flex flex-fill align-items-center ">
+                    <div class="text-xs text-muted">
+                        <time class="comment-date mr-2">9月前</time>
+</div>
+                    <div class="flex-fill"></div>
+                    <a class="comment-reply-link" onclick="return addComment.moveForm( &#39;comment-11&#39;,&#39;11&#39;, &#39;respond&#39;,&#39;128&#39; ) " href="https://www.wx-smile.com/128?replytocom=11#respond" rel="nofollow"><i class="text-md iconfont icon-xiaoxi"></i></a>
+                </div>
+            </div>
+            <div class="border-bottom border-light py-2"></div>
+        </div>
+<!-- .comment-text -->
+    </article><!-- .comment-body -->
+</li>
+</ul>
+<!-- .children -->
+</li>
+<li id="comment-14" class="comment odd alt thread-even depth-1">
+    <article id="div-comment-14" class="d-flex flex-fill comment-body mt-4"><div class="comment-avatar-author flex-avatar w-48 mr-2 ">
+            <img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="avatar avatar-48 photo" height="48" width="48" data-src="//gravatar.loli.net/avatar/f8c3bfad11558af8a3a7fdd372a2e240?s=48&amp;d=https%3A%2F%2Fwww.wx-smile.com%2Fwp-content%2Fuploads%2F2019%2F03%2F10494461955382E375EA8457EBC3CF7B96576BB4BF.jpg&amp;r=g" data-nclazyload="true" data-srcset="//gravatar.loli.net/avatar/f8c3bfad11558af8a3a7fdd372a2e240?s=96&amp;d=https%3A%2F%2Fwww.wx-smile.com%2Fwp-content%2Fuploads%2F2019%2F03%2F10494461955382E375EA8457EBC3CF7B96576BB4BF.jpg&amp;r=g 2x">
+</div>
+<!-- .comment-author -->
+        <div class="flex-fill flex-column comment-text mt-1">
+            <div class="d-flex align-items-center comment-info mb-1">
+                <div class="comment-author text-sm">
+                	andy                </div>
+            </div>
+            <div class="comment-content d-inline-block text-sm">
+                <p>请问怎么设置PAC模式呢？不想走全局，太费流量了</p>
+                            </div>
+<!-- .comment-content -->
+            <div class="comment-footer">
+                <div class="d-flex flex-fill align-items-center ">
+                    <div class="text-xs text-muted">
+                        <time class="comment-date mr-2">6月前</time>
+</div>
+                    <div class="flex-fill"></div>
+                    <a class="comment-reply-link" onclick="return addComment.moveForm( &#39;comment-14&#39;,&#39;14&#39;, &#39;respond&#39;,&#39;128&#39; ) " href="https://www.wx-smile.com/128?replytocom=14#respond" rel="nofollow"><i class="text-md iconfont icon-xiaoxi"></i></a>
+                </div>
+            </div>
+            <div class="border-bottom border-light py-2"></div>
+        </div>
+<!-- .comment-text -->
+    </article><!-- .comment-body --><ul class="children"><li id="comment-15" class="comment byuser comment-author-smile bypostauthor even depth-2">
+    <article id="div-comment-15" class="d-flex flex-fill comment-body mt-4"><div class="comment-avatar-author flex-avatar w-48 mr-2 ">
+            <img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="avatar avatar-48 photo" height="48" width="48" data-src="//gravatar.loli.net/avatar/9eebe35c3a3321d3411b3273315e0a8f?s=48&amp;d=https%3A%2F%2Fwww.wx-smile.com%2Fwp-content%2Fuploads%2F2019%2F03%2F10494461955382E375EA8457EBC3CF7B96576BB4BF.jpg&amp;r=g" data-nclazyload="true" data-srcset="//gravatar.loli.net/avatar/9eebe35c3a3321d3411b3273315e0a8f?s=96&amp;d=https%3A%2F%2Fwww.wx-smile.com%2Fwp-content%2Fuploads%2F2019%2F03%2F10494461955382E375EA8457EBC3CF7B96576BB4BF.jpg&amp;r=g 2x"><span class="avatar-status avatar-bottom"><span class="badge badge-pill badge-info font-theme text-xs mx-1">Lv.1</span></span>        </div>
+<!-- .comment-author -->
+        <div class="flex-fill flex-column comment-text mt-1">
+            <div class="d-flex align-items-center comment-info mb-1">
+                <div class="comment-author text-sm">
+                	微笑 <i class="cut"></i><span class="badge badge-rank badge-primary text-xs mx-1">Administrator</span>                </div>
+            </div>
+            <div class="comment-content d-inline-block text-sm">
+                <p><a rel="nofollow" class="comment_at" href="https://www.wx-smile.com/128#comment-14">@andy：</a> 你好，文章已更新，可以尝试一下:D</p>
+                            </div>
+<!-- .comment-content -->
+            <div class="comment-footer">
+                <div class="d-flex flex-fill align-items-center ">
+                    <div class="text-xs text-muted">
+                        <time class="comment-date mr-2">6月前</time>
+</div>
+                    <div class="flex-fill"></div>
+                    <a class="comment-reply-link" onclick="return addComment.moveForm( &#39;comment-15&#39;,&#39;15&#39;, &#39;respond&#39;,&#39;128&#39; ) " href="https://www.wx-smile.com/128?replytocom=15#respond" rel="nofollow"><i class="text-md iconfont icon-xiaoxi"></i></a>
+                </div>
+            </div>
+            <div class="border-bottom border-light py-2"></div>
+        </div>
+<!-- .comment-text -->
+    </article><!-- .comment-body -->
+</li></ul>
+<!-- .children -->
+</li>
+<li id="comment-17" class="comment odd alt thread-odd thread-alt depth-1">
+    <article id="div-comment-17" class="d-flex flex-fill comment-body mt-4"><div class="comment-avatar-author flex-avatar w-48 mr-2 ">
+            <img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="avatar avatar-48 photo" height="48" width="48" data-src="//gravatar.loli.net/avatar/48a776b95bf694f8d1da9e79db455860?s=48&amp;d=https%3A%2F%2Fwww.wx-smile.com%2Fwp-content%2Fuploads%2F2019%2F03%2F10494461955382E375EA8457EBC3CF7B96576BB4BF.jpg&amp;r=g" data-nclazyload="true" data-srcset="//gravatar.loli.net/avatar/48a776b95bf694f8d1da9e79db455860?s=96&amp;d=https%3A%2F%2Fwww.wx-smile.com%2Fwp-content%2Fuploads%2F2019%2F03%2F10494461955382E375EA8457EBC3CF7B96576BB4BF.jpg&amp;r=g 2x">
+</div>
+<!-- .comment-author -->
+        <div class="flex-fill flex-column comment-text mt-1">
+            <div class="d-flex align-items-center comment-info mb-1">
+                <div class="comment-author text-sm">
+                	lp                </div>
+            </div>
+            <div class="comment-content d-inline-block text-sm">
+                <p>为啥curl google失败：curl: (52) Empty reply from server</p>
+                            </div>
+<!-- .comment-content -->
+            <div class="comment-footer">
+                <div class="d-flex flex-fill align-items-center ">
+                    <div class="text-xs text-muted">
+                        <time class="comment-date mr-2">3月前</time>
+</div>
+                    <div class="flex-fill"></div>
+                    <a class="comment-reply-link" onclick="return addComment.moveForm( &#39;comment-17&#39;,&#39;17&#39;, &#39;respond&#39;,&#39;128&#39; ) " href="https://www.wx-smile.com/128?replytocom=17#respond" rel="nofollow"><i class="text-md iconfont icon-xiaoxi"></i></a>
+                </div>
+            </div>
+            <div class="border-bottom border-light py-2"></div>
+        </div>
+<!-- .comment-text -->
+    </article><!-- .comment-body --><ul class="children"><li id="comment-18" class="comment byuser comment-author-smile bypostauthor even depth-2">
+    <article id="div-comment-18" class="d-flex flex-fill comment-body mt-4"><div class="comment-avatar-author flex-avatar w-48 mr-2 ">
+            <img alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="avatar avatar-48 photo" height="48" width="48" data-src="//gravatar.loli.net/avatar/9eebe35c3a3321d3411b3273315e0a8f?s=48&amp;d=https%3A%2F%2Fwww.wx-smile.com%2Fwp-content%2Fuploads%2F2019%2F03%2F10494461955382E375EA8457EBC3CF7B96576BB4BF.jpg&amp;r=g" data-nclazyload="true" data-srcset="//gravatar.loli.net/avatar/9eebe35c3a3321d3411b3273315e0a8f?s=96&amp;d=https%3A%2F%2Fwww.wx-smile.com%2Fwp-content%2Fuploads%2F2019%2F03%2F10494461955382E375EA8457EBC3CF7B96576BB4BF.jpg&amp;r=g 2x"><span class="avatar-status avatar-bottom"><span class="badge badge-pill badge-info font-theme text-xs mx-1">Lv.1</span></span>        </div>
+<!-- .comment-author -->
+        <div class="flex-fill flex-column comment-text mt-1">
+            <div class="d-flex align-items-center comment-info mb-1">
+                <div class="comment-author text-sm">
+                	微笑 <i class="cut"></i><span class="badge badge-rank badge-primary text-xs mx-1">Administrator</span>                </div>
+            </div>
+            <div class="comment-content d-inline-block text-sm">
+                <p><a rel="nofollow" class="comment_at" href="https://www.wx-smile.com/128#comment-17">@lp：</a> 确定你的代理节点可用？注意要先export http_proxy</p>
+                            </div>
+<!-- .comment-content -->
+            <div class="comment-footer">
+                <div class="d-flex flex-fill align-items-center ">
+                    <div class="text-xs text-muted">
+                        <time class="comment-date mr-2">1周前</time>
+</div>
+                    <div class="flex-fill"></div>
+                    <a class="comment-reply-link" onclick="return addComment.moveForm( &#39;comment-18&#39;,&#39;18&#39;, &#39;respond&#39;,&#39;128&#39; ) " href="https://www.wx-smile.com/128?replytocom=18#respond" rel="nofollow"><i class="text-md iconfont icon-xiaoxi"></i></a>
+                </div>
+            </div>
+            <div class="border-bottom border-light py-2"></div>
+        </div>
+<!-- .comment-text -->
+    </article><!-- .comment-body -->
+</li></ul>
+<!-- .children -->
+</li>		</ul>
+<!-- .comment-list -->
+</div>
+<!-- #comments -->
+            </div>
+            <div class="sidebar col-lg-3 d-none d-lg-block" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 522px;">
+                
+                
+                <div class="theiaStickySidebar" style="padding-top: 1px; padding-bottom: 1px; position: fixed; transform: translateY(20px); left: 975.5px; top: 0px; width: 255px;"><div id="widget-scroll-menu" class="widget widget-scroll">
+            <div class="widget-scroll-menu">
+                <ul>
+<li class="nav-item active"> <!--选中或者到达那个区域，加 active-->
+                        <a class="btn btn-light btn-block text-left" href="https://www.wx-smile.com/128#scroll-0" title="安装 SSR 脚本">
+                            <span class="nav-dot"></span>
+                            <span class="nav-content"><span class="h-1x">安装 SSR 脚本</span>
+                        </span></a>
+                    </li>
+                                    <li class="nav-item"> <!--选中或者到达那个区域，加 active-->
+                        <a class="btn btn-light btn-block text-left" href="https://www.wx-smile.com/128#scroll-1" title="使用 PAC">
+                            <span class="nav-dot"></span>
+                            <span class="nav-content"><span class="h-1x">使用 PAC</span>
+                        </span></a>
+                    </li>
+                                    <li class="nav-item"> <!--选中或者到达那个区域，加 active-->
+                        <a class="btn btn-light btn-block text-left" href="https://www.wx-smile.com/128#scroll-2" title="设置全局网络">
+                            <span class="nav-dot"></span>
+                            <span class="nav-content"><span class="h-1x">设置全局网络</span>
+                        </span></a>
+                    </li>
+                                    <li class="nav-item"> <!--选中或者到达那个区域，加 active-->
+                        <a class="btn btn-light btn-block text-left" href="https://www.wx-smile.com/128#scroll-3" title="转换HTTP代理">
+                            <span class="nav-dot"></span>
+                            <span class="nav-content"><span class="h-1x">转换HTTP代理</span>
+                        </span></a>
+                    </li>
+                                    <li class="nav-item"> <!--选中或者到达那个区域，加 active-->
+                        <a class="btn btn-light btn-block text-left" href="https://www.wx-smile.com/128#scroll-4" title="每次开机时运行">
+                            <span class="nav-dot"></span>
+                            <span class="nav-content"><span class="h-1x">每次开机时运行</span>
+                        </span></a>
+                    </li>
+                                </ul>
+</div>
+        </div><div class="resize-sensor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; z-index: -1; visibility: hidden;"><div class="resize-sensor-expand" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;"><div style="position: absolute; left: 0px; top: 0px; transition: all 0s ease 0s; width: 265px; height: 307px;"></div></div><div class="resize-sensor-shrink" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;"><div style="position: absolute; left: 0; top: 0; transition: 0s; width: 200%; height: 200%"></div></div></div></div></div>
+        </div>
+    </div>
+</main><div id="post-dock" class="post-dock bg-white py-2 post-dock-unpin">
+	<div class="container ">
+		<div class="d-flex flex-row justify-content-around align-items-center h-100">
+							<a class="py-2 d-inline-block" href="https://www.wx-smile.com/128#comments">
+					<i class="text-xl text-height-xs iconfont icon-Chat"></i>
+					<span class="text-font badge badge-pill badge-danger">9</span>				</a>
+						<a class=" btn-action-like py-2 d-inline-block" href="javascript:" data-action="like" data-id="128">
+								<i class="text-xl iconfont icon-like-line"></i>
+				<span class="text-font badge badge-pill badge-danger like-count">12</span>			</a>
+						<a class="py-2 d-inline-block apollo-collection " data-id="128" data-nonce="7c7659cd45" href="javascript:;">
+				<i class="text-xl text-height-xs iconfont icon-star"></i>
+				<span class="text-font badge badge-pill badge-danger collection-count"></span>
+			</a>
+									<a class="py-2 d-inline-block" id="btn-bigger-cover" href="javascript:;" data-id="128">
+				<i class="text-xl text-height-xs iconfont icon-fenxiang-2"></i>
+			</a>
+					</div>
+	</div>
+</div>
+                        <div class="list-related list-scroll bg-light py-4 py-lg-5">
+            <div class="container">
+                <div class="h5 mb-3 mb-md-4">
+<i class="text-xl text-primary iconfont icon-gengxin mr-1"></i><span class="d-inline-block align-middle">相关文章</span>
+</div>
+                <div class="list-scroll-x">
+                    <div class="row row-md list-grouped list-bordered-padding">
+                                                                                <div class="col-6 col-md-3 d-flex">
+                                <div class="list-item overlay-hover">
+                                    <div class="media media-16x9">
+                                        <a href="https://www.wx-smile.com/198" class="media-content" style="background-image:url(&quot;data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7&quot;)" title="Linux 下 ShadowsocksR 服务端的配置" data-bg="url(&#39;https://www.wx-smile.com/wp-content/themes/Cosy3.2.1/timthumb.php?src=https://www.wx-smile.com/wp-content/uploads/2019/03/ssr1.png&amp;h=300&amp;w=450&amp;zc=1&amp;a=c&amp;q=100&amp;s=1&#39;)" data-nclazyload="true">
+                                            <div class="overlay"></div>
+                                        </a>
+                                                                                                                                                                                                    </div>
+                                    <div class="list-content">
+                                        <div class="list-body">
+                                            <a href="https://www.wx-smile.com/198" title="Linux 下 ShadowsocksR 服务端的配置" class="list-title text-md h-2x">Linux 下 ShadowsocksR 服务端的配置</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+        </div>
+            <footer class="footer bg-white border-top border-light text-center py-5"><div class="container">
+        <div class="footer-social">
+            
+        </div>
+        <div class="footer-copyright text-muted text-xs mt-4">
+            <div class="my-1">Copyright © 2019-2020 <a href="https://www.wx-smile.com/" title="微笑小站" rel="home">微笑小站</a>. Designed by <a href="https://www.nicetheme.cn/" title="nicetheme奈思主题-资深的原创WordPress主题开发团队" target="_blank">nicetheme</a>.</div>
+<div class="my-1"></div>        </div>
+    </div>
+</footer><div class="mobile-overlay"></div>
+<aside class="mobile-sidebar bg-light"><div class="mobile-sidebar-inner">
+		                        
+            <div class="mobile-sidebar-header">
+                <div class="bg-effect bg-poster  nc-no-lazy" style="background-image: url(https://www.wx-smile.com/wp-content/uploads/2019/02/Logo-P7.jpg)">
+                    <span class="overlay-grad"></span>
+                </div>
+                <div class="mobile-sidebar-action">
+                                            <a href="javascript:;" class="link-action text-xl switch-dark-mode mr-2">
+                            <i class="night iconfont icon-moon_circle"></i>
+							<i class="light text-warning iconfont icon-moon_circle_fill"></i>
+                        </a>
+                                        <a href="javascript:;" class="link-action text-xl" id="mobile-sidebar-close"><i class="d-block iconfont icon-close-filled"></i></a>
+                </div>
+                <div class="mobile-sidebar-user">
+                                    <div class="flex-fill mx-3">
+                        <a class="sign-action" href="https://www.wx-smile.com/%e7%99%bb%e5%bd%95-%e6%b3%a8%e5%86%8c/user/login">未登录</a>
+                        <div class="text-light text-xs">现在登录 / 注册，享受更多福利</div>
+                    </div>
+                                </div>
+                            </div>
+
+            				<div class="mobile-sidebar-tab-menu">
+	        <ul id="mobile-tab-menu-id" class="mobile-tab-menu">
+<li><a href="https://www.wx-smile.com/wp-admin/nav-menus.php">请到 [后台-&gt;外观-&gt;菜单] 中设置菜单</a></li>	        </ul>
+</div>
+	</div>
+</aside><div id="search-popup-wrap">
+    <div class="search-popup-cover bg-dark px-3 px-md-4 px-lg-5 py-5">
+        <div class="bg-effect bg-poster nc-no-lazy" style="background-image: url(&#39;https://www.wx-smile.com/wp-content/uploads/2019/02/will-africano-1218279-unsplash-1.jpg&#39;)">
+            <span class="overlay"></span>
+        </div>
+        <form role="search" id="searchform" class="search-popup-form py-lg-5" method="get" action="https://www.wx-smile.com/">
+           <input class="form-control form-control-lg form-transparent" type="text" placeholder="请输入搜索关键词并按回车键…" name="s" id="s" required="">
+</form>
+    </div>
+        <div class="search-key-push px-3 px-lg-5 py-3 py-lg-4">
+        <div class="h6 mb-3">
+<i class="text-danger text-xl iconfont icon-remen mr-1"></i><span class="align-middle">热门搜索</span>
+</div>
+        <ul class="nav nav-pills m-n1">
+<li class="nav-item p-1"><a href="https://www.wx-smile.com/tag/linux" target="_blank" class="btn btn-light btn-sm">Linux</a></li>
+                    </ul>
+</div>
+    </div>
+<div id="author-popup-wrap">
+    <div class="author-popup-cover">
+        <div class="media media-16x9 bg-dark-gradient">
+            <div class="bg-effect bg-dark-gradient bg-author" style="background: linear-gradient(rgb(238, 225, 189) 0%, rgb(109, 51, 49) 100%, rgb(168, 104, 85) 100%);"></div>
+            <div class="bg-effect bg-poster" data-img="" style="background-image: url(&quot;data:image/png;base64,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&quot;);"></div>
+        </div>
+        <div class="author-popup-meta mt-n5">
+            <div class="px-4 pb-3 pb-md-4">
+                <div class="d-flex align-items-center justify-content-center">
+                    <a href="https://www.wx-smile.com/author/smile" class="flex-avatar mx-2 w-96" taget="_blank">
+                        <img alt="" src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/9eebe35c3a3321d3411b3273315e0a8f(1).jpeg" srcset="//gravatar.loli.net/avatar/9eebe35c3a3321d3411b3273315e0a8f?s=192&amp;d=https%3A%2F%2Fwww.wx-smile.com%2Fwp-content%2Fuploads%2F2019%2F03%2F10494461955382E375EA8457EBC3CF7B96576BB4BF.jpg&amp;r=g 2x" class="avatar avatar-96 photo nc-no-lazy" height="96" width="96"><span class="avatar-status avatar-bottom"><span class="badge badge-pill badge-info font-theme text-xs mx-1">Lv.1</span></span>                    </a>
+                </div>
+                <div class="text-center mt-3">
+                    <a href="https://www.wx-smile.com/author/smile" class="h5" target="_blank">
+                        <span>微笑 <i class="cut"></i><span class="badge badge-rank badge-primary text-xs mx-1">Administrator</span></span>
+                    </a>
+                    
+                    
+                    <div class="d-block text-sm text-muted mt-2"><span class="h-2x"></span></div>
+                </div>
+            </div>
+                        <div class="row no-gutters text-center pb-3 pb-md-4">
+                <a href="https://www.wx-smile.com/author/smile" class="col" target="_blank">
+                    <span class="text-font text-lg d-block">12</span>
+                    <small class="text-xs text-muted">文章</small>
+                </a>
+                <div class="col">
+                    <span class="text-font text-lg d-block">3</span>
+                    <small class="text-xs text-muted">评论</small>
+                </div>
+                <div class="col">
+                    <span class="text-font text-lg d-block">12</span>
+                    <small class="text-xs text-muted">喜欢</small>
+                </div>
+            </div>
+                  </div>
+    </div>
+</div>
+<div class="nice-fixed-widget d-none d-md-block">
+    <ul>
+<li>
+                <a href="javascript:" class=" switch-dark-mode btn btn-secondary btn-icon btn-lg nice-tooltip-hide mb-1" data-toggle="nicetooltip" data-placement="left" title="" data-original-title="深色模式">
+                    <span>
+                        <i class="night iconfont icon-moon_circle"></i>
+						<i class="light text-warning iconfont icon-moon_circle_fill"></i>
+                    </span>
+                </a>
+            </li>
+                
+                <li>
+            <a href="javascript:" data-action="like" data-id="128" class=" btn-action-like btn btn-secondary btn-icon btn-lg nice-tooltip-hide mb-1" data-toggle="nicetooltip" data-placement="left" title="" data-original-title="点个赞">
+				                <small class="text-font icon-status status-right bg-danger like-count">12</small>
+                <span>
+                    <i class="iconfont icon-like"></i>
+                </span>
+            </a>
+        </li>
+		        <li>
+            <a href="javascript:" class="btn-scroll-comment btn btn-secondary btn-icon btn-lg nice-tooltip-hide mb-1" data-toggle="nicetooltip" data-placement="left" title="" data-original-title="发表评论">
+                <small class="text-font icon-status status-right bg-danger">9</small>
+                <span>
+                    <i class="iconfont icon-chat-alt"></i>
+                </span>
+            </a>
+        </li>
+		                <li>
+            <a id="btn-bigger-cover" href="javascript:;" data-id="128" class="btn-scroll-share btn btn-secondary btn-icon btn-lg nice-tooltip-hide mb-1" data-toggle="nicetooltip" data-placement="left" title="" data-original-title="分享本文">
+                <span>
+                    <i class="iconfont icon-share1"></i>
+                </span>
+            </a>
+        </li>
+               
+        <li>
+            <a id="back-to-top" href="javascript:" class="btn btn-secondary btn-icon btn-lg current">
+                <span class="icon-stack">
+                    <i class="text-sm iconfont icon-caret-up"></i>
+                    <small class="back-to-top-text">Top</small>
+                </span>
+            </a>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript" src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/smartideo.js"></script><script type="text/javascript" src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/jimu.js"></script><script type="text/javascript" src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/lazyload.min.js"></script><script type="text/javascript" src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/picturefill.min.js"></script><script type="text/javascript" src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/lightgallery-all.min.js"></script><script type="text/javascript" src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/jquery.mousewheel.min.js"></script><script type="text/javascript" src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/nice-poster.js"></script><script type="text/javascript" src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/popper.min.js"></script><script type="text/javascript" src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/bootstrap.min.js"></script><script type="text/javascript" src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/plugins.min.js"></script><script type="text/javascript" src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/ResizeSensor.min.js"></script><script type="text/javascript" src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/theia-sticky-sidebar.min.js"></script><script type="text/javascript" src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/nicetheme.js"></script><script type="text/javascript" src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/ajax-comment.js"></script><script type="text/javascript" src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/wp-polyfill.min.js"></script><script type="text/javascript">
+( 'fetch' in window ) || document.write( '<script src="https://www.wx-smile.com/wp-includes/js/dist/vendor/wp-polyfill-fetch.min.js?ver=3.0.0">' + 'ipt>' );( document.contains ) || document.write( '<script src="https://www.wx-smile.com/wp-includes/js/dist/vendor/wp-polyfill-node-contains.min.js?ver=3.26.0-0">' + 'ipt>' );( window.FormData && window.FormData.prototype.keys ) || document.write( '<script src="https://www.wx-smile.com/wp-includes/js/dist/vendor/wp-polyfill-formdata.min.js?ver=3.0.12">' + 'ipt>' );( Element.prototype.matches && Element.prototype.closest ) || document.write( '<script src="https://www.wx-smile.com/wp-includes/js/dist/vendor/wp-polyfill-element-closest.min.js?ver=2.0.2">' + 'ipt>' );
+</script><script type="text/javascript" src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/i18n.min.js"></script><script type="text/javascript">
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "apollo", { "locale_data": { "messages": { "": {} } } } );
+</script><script type="text/javascript" src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/apollo-cosy.js"></script><script type="text/javascript" src="./Ubuntu 下 ShadowsocksR 客户端的安装与配置 – 微笑小站_files/wp-embed.min.js"></script>
+
+
+</body></html>
