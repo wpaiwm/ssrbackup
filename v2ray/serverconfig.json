@@ -1,0 +1,22 @@
+{
+"inbounds": [
+    {
+      "port": 443, 
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "5f83cf94-b33c-4989-b50d-c06c84baa00a"        
+           }
+        ]
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ]
+}
+

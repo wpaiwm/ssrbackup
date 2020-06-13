@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<!-- saved from url=(0126)https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/ -->
+<html lang="zh-CN" class="nivo-lightbox-notouch"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<title>V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai</title>
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="Ai » Feed" href="https://ailitonia.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="Ai » 评论Feed" href="https://ailitonia.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Ai » 密码保护：V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装评论Feed" href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/feed/">
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/ailitonia.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=f56447c6b3f155ce1094d766c8001431"}};
+			/*! This file is auto-generated */
+			!function(e,a,t){var r,n,o,i,p=a.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340])}return!1}function d(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(i=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)t.supports[i[o]]=l(i[o]),t.supports.everything=t.supports.everything&&t.supports[i[o]],"flag"!==i[o]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[i[o]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(r=t.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="wp-block-library-css" href="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/style.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="pure-highlightjs-style-css" href="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/dark.css" type="text/css" media="all">
+<link rel="stylesheet" id="pure-highlightjs-css-css" href="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/pure-highlight.css" type="text/css" media="all">
+<link rel="stylesheet" id="responsive-lightbox-nivo-css" href="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/nivo-lightbox.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="responsive-lightbox-nivo-default-css" href="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/default.css" type="text/css" media="all">
+<link rel="stylesheet" id="blackoot-css" href="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/blackoot.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="blackoot-style-css" href="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="font-awesome-css" href="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/font-awesome.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="Open-sans-webfonts-css" href="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/css" type="text/css" media="all">
+<link rel="stylesheet" id="Quicksand-webfonts-css" href="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/css(1)" type="text/css" media="all">
+<link rel="stylesheet" id="devework-shortcodes-css" href="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/shortcodes.css" type="text/css" media="all">
+<link rel="stylesheet" id="devework-shortcodes-fontello-css" href="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/fontello.css" type="text/css" media="all">
+<link rel="stylesheet" id="tablepress-default-css" href="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/tablepress-combined.min.css" type="text/css" media="all">
+<script type="text/javascript" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/jquery.js"></script>
+<script type="text/javascript" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/nivo-lightbox.min.js"></script>
+<script type="text/javascript" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/infinite-scroll.pkgd.min.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var rlArgs = {"script":"nivo","selector":"lightbox","customEvents":"","activeGalleries":"1","effect":"fade","clickOverlayToClose":"1","keyboardNav":"1","errorMessage":"The requested content cannot be loaded. Please try again later.","woocommerce_gallery":"0","ajaxurl":"https:\/\/ailitonia.com\/wp-admin\/admin-ajax.php","nonce":"3b55ff5661"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/front.js"></script>
+<script type="text/javascript" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/hoverIntent.min.js"></script>
+<script type="text/javascript" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/blackoot.min.js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://ailitonia.com/wp-content/themes/Blackoot/js/html5.js?ver=1.1.20_Aili魔改_v1.3.13'></script>
+<![endif]-->
+<link rel="https://api.w.org/" href="https://ailitonia.com/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://ailitonia.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://ailitonia.com/wp-includes/wlwmanifest.xml">
+<link rel="prev" title="科技树点歪系列——《异星歧途(The Road Not Taken) 》" href="https://ailitonia.com/archives/%e7%a7%91%e6%8a%80%e6%a0%91%e7%82%b9%e6%ad%aa%e7%b3%bb%e5%88%97-%e3%80%8a%e5%bc%82%e6%98%9f%e6%ad%a7%e9%80%94the-road-not-taken-%e3%80%8b/">
+<link rel="next" title="密码保护：ShadowsocksR 服务端安装教程" href="https://ailitonia.com/archives/shadowsocksr-%e6%9c%8d%e5%8a%a1%e7%ab%af%e5%ae%89%e8%a3%85%e6%95%99%e7%a8%8b/">
+<link rel="canonical" href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/">
+<link rel="shortlink" href="https://ailitonia.com/?p=685">
+<link rel="alternate" type="application/json+oembed" href="https://ailitonia.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Failitonia.com%2Farchives%2Fv2ray%25e5%2588%25a9%25e7%2594%25a8websockettlsnginx%25e5%25ae%259e%25e7%258e%25b0%25e6%25b5%2581%25e9%2587%258f%25e4%25bc%25aa%25e8%25a3%2585%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://ailitonia.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Failitonia.com%2Farchives%2Fv2ray%25e5%2588%25a9%25e7%2594%25a8websockettlsnginx%25e5%25ae%259e%25e7%258e%25b0%25e6%25b5%2581%25e9%2587%258f%25e4%25bc%25aa%25e8%25a3%2585%2F&amp;format=xml">
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #444444; background-image: url("https://ailitonia.com/wp-content/uploads/2018/07/9763bc67b9b0259f2159d98c2d0f2f42f819b21484812-NXXrjk.jpg"); background-position: center center; background-size: cover; background-repeat: no-repeat; background-attachment: fixed; }
+</style>
+<link rel="icon" href="https://ailitonia.com/wp-content/uploads/2018/02/cropped-Logo-32x32.png" sizes="32x32">
+<link rel="icon" href="https://ailitonia.com/wp-content/uploads/2018/02/cropped-Logo-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://ailitonia.com/wp-content/uploads/2018/02/cropped-Logo-180x180.png">
+<meta name="msapplication-TileImage" content="https://ailitonia.com/wp-content/uploads/2018/02/cropped-Logo-270x270.png">
+<script src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/wp-emoji-release.min.js" type="text/javascript" defer=""></script></head>
+<body class="post-template-default single single-post postid-685 single-format-standard custom-background">
+<div id="main-wrap">
+<div id="header-wrap">
+<div id="tophead-wrap">
+<div class="container">
+<div class="tophead">
+<form role="search" method="get" class="search-form" action="https://ailitonia.com/">
+<label>
+<span class="screen-reader-text">搜索：</span>
+<input type="search" class="search-field" placeholder="搜索…" value="" name="s">
+</label>
+<input type="submit" class="search-submit" value="搜索">
+</form> </div>
+</div>
+</div>
+<div id="header">
+<div class="container">
+<div id="logo">
+<a href="https://ailitonia.com/" title="Ai" rel="home">
+<h1 class="site-title" style="display:none">Ai</h1>
+<img src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/1.1-id47878234.jpg" alt="Ai">
+</a>
+</div>
+<div id="tagline">你想要的，这儿都没有~</div>
+</div>
+</div>
+<div id="nav-wrap">
+<div id="navbar" class="container">
+<div class="menu-%e5%af%bc%e8%88%aa-container"><ul id="menu-%e5%af%bc%e8%88%aa" class="menu sf-menu sf-js-enabled sf-arrows"><li id="menu-item-1500" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-1500"><a href="https://ailitonia.com/">Home</a></li>
+<li id="menu-item-191" class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-191"><a href="https://ailitonia.com/news/">News</a></li>
+<li id="menu-item-503" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-503"><a href="https://ailitonia.com/live/">Live</a></li>
+<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-769"><a href="https://ailitonia.com/archives/">Archives</a></li>
+<li id="menu-item-193" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-193"><a href="https://ailitonia.com/about/">About</a></li>
+</ul></div><select id="dropdown-menu"><option value="">Menu</option><option value="https://ailitonia.com/">Home</option><option value="https://ailitonia.com/news/">News</option><option value="https://ailitonia.com/live/">Live</option><option value="https://ailitonia.com/archives/">Archives</option><option value="https://ailitonia.com/about/">About</option></select> </div>
+</div>
+</div>
+<div id="page-title">
+<div class="container">
+<div id="breadcrumbs">
+<a href="https://ailitonia.com/">Home</a><span class="separator"> / </span><a href="https://ailitonia.com/topics/notebook/linux/" rel="tag">Linux</a><span class="separator"> / </span><a href="https://ailitonia.com/topics/notebook/" rel="tag">小本本</a><span class="separator"> / </span>密码保护：V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 </div>
+
+<h1>密码保护：V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装</h1>
+</div>
+</div>
+<style type="text/css">
+.autorbox {
+box-shadow: 0 0 3px RGBA(0,0,0,.15);
+background-color: #444;
+<!-- border:1px #b2b2b2 solid; -->
+<!-- border-radius: 2px; -->
+margin:0 0 0 0;
+padding: 10px 10px 10px 10px;
+color: #f0f0f0;
+min-height:70px;
+position: relative;
+}
+.autorhead {
+box-shadow: 0 0 3px RGBA(0,0,0,.15);
+background-color: #444;
+border:1px #fda82c solid;
+width:64px;
+height:64px;
+border-radius: 2px;
+padding: 2px 2px 2px 2px;
+color: #f0f0f0;
+margin:10px 0 0 10px;
+float:left;
+}
+.autorinfo {
+<!-- box-shadow: 0 0 3px RGBA(0,0,0,.15); -->
+background-color: #444;
+<!-- border:1px #b2b2b2 solid; -->
+<!-- border-radius: 2px; -->
+font-size: 11pt;
+line-height: 12pt;
+margin:0 0 0 96px;
+letter-spacing: 0;
+padding: 10px 5px 5px 15px;
+color: #f0f0f0;
+position: relative;
+ white-space: pre; /* CSS 2.0 */ 
+ white-space: pre-wrap; /* CSS 2.1 */ 
+ white-space: pre-line; /* CSS 3.0 */ 
+ white-space: -pre-wrap; /* Opera 4-6 */ 
+ white-space: -o-pre-wrap; /* Opera 7 */ 
+ white-space: -moz-pre-wrap; /* Mozilla */ 
+ white-space: -hp-pre-wrap; /* HP Printers */ 
+ word-wrap: break-word; /* IE 5+, 文本行的任意字内断开 */
+}
+.copyrightbox {
+box-shadow: 0 0 3px RGBA(0,0,0,.15);
+background-color: #444;
+margin:0 0 0 0;
+padding: 10px 10px 10px 10px;
+color: #f0f0f0;
+position: relative;
+}
+.copyrightinfo {
+<!-- box-shadow: 0 0 3px RGBA(0,0,0,.15); -->
+background-color: #444;
+font-size: 11pt;
+line-height: 16pt;
+margin:0 0 0 0;
+letter-spacing: 0;
+padding: 10px 10px 10px 10px;
+color: #f0f0f0;
+position: relative;
+}
+</style>
+<div class="container" id="main-content">
+<div id="page-container">
+<div id="post-685" class="single-post post-685 post type-post status-publish format-standard post-password-protected has-post-thumbnail hentry category-linux category-notebook tag-cdn tag-linux tag-v2ray">
+<div class="postmetadata">
+<span class="entry-title hatom-feed-info">密码保护：V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装</span>
+<span class="meta-date post-date updated"><i class="fa fa-calendar"></i><a href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/" title="密码保护：V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装" rel="bookmark">
+2018年3月1日 </a></span>
+<span class="meta-author author vcard"><i class="fa fa-user"></i><a class="fn" href="https://ailitonia.com/archives/author/ailitonia/" title="View all posts by Ailitonia" rel="author">Ailitonia</a></span>
+<div class="meta-category">
+<span class="category-icon" title="Category"><i class="fa fa-tag"></i></span>
+<a href="https://ailitonia.com/topics/notebook/linux/">Linux</a><a href="https://ailitonia.com/topics/notebook/">小本本</a> </div>
+<span class="meta-comments"><i class="fa fa-comment"></i>
+<a href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/#comments">17 Comments</a> </span>
+<div class="meta-tags"><span class="tags-icon"><i class="fa fa-tags"></i></span><a href="https://ailitonia.com/tags/cdn/" rel="tag">CDN</a><a href="https://ailitonia.com/tags/linux/" rel="tag">Linux</a><a href="https://ailitonia.com/tags/v2ray/" rel="tag">V2Ray</a></div> </div>
+<div class="thumbnail">
+<img width="512" height="217" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/v2ray.webp" class="scale-with-grid wp-post-image" alt="" srcset="https://ailitonia.com/wp-content/uploads/2018/03/v2ray.jpg 512w, https://ailitonia.com/wp-content/uploads/2018/03/v2ray-300x127.jpg 300w" sizes="(max-width: 512px) 100vw, 512px"> </div>
+<div class="post-contents entry-content">
+<p><span style="font-size: 12pt;">形势严峻，改用V2Ray了。我就是想玩点游戏而已，至于那么难么……_(:з)∠)_</span><span id="more-685"></span></p>
+<div class="dw-box dw-box-warning"><i class="dwicon-warning"></i><span style="font-size: 12pt;">注意：本文更新于2019年9月27日，对应v2ray版本4.20，请注意内容的的时效性</span></div>
+<div class="dw-box dw-box-grey"><i class="dwicon-grey"></i>更新日志：<p></p>
+<p>2019.10.5 update, fix bug.</p>
+<p>2019.9.27 update, fix bug, add apache config.</p>
+<p>2019.5.14更新，给群友发教程，突然发现部分排版年代久远还换了插件有点乱，有的参考链接还跪了，匆匆调整一番……</p>
+<p>2019.2.12更新，修改配置文件为新版（4.0）格式</p>
+<p>2018.3.26更新，修改了部分内容，适用于当前最新版本。</p>
+<p>2018.3.14更新，增加了CDN加速<del>（减速）</del>的相关内容，<a href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/#cdn">点我</a>直接跳转到这部分。</p>
+<p>2018.3.3更新，修改了几处错别字，增加了一点点内容，增加了客户端的链接，修改了一点配置和命令。</p></div>
+<hr>
+<div class="dw-box dw-box-alert"><i class="dwicon-alert"></i><span style="font-size: 12pt;">请不要将翻墙的技术用于任何非法的途径！</span></div>
+<div class="dw-box dw-box-warning"><i class="dwicon-warning"></i><span style="font-size: 12pt;">没有什么能够保证万无一失，任何技术始终处于更替当中</span></div>
+<p><span style="font-size: 12pt;">因为这段时间各种ip被墙，自己也损失了好几个，所以还是决定改为用V2Ray了。</span></p>
+<p><span style="font-size: 12pt;">本文参考于<a href="https://toutyrater.github.io/advanced/wss_and_web.html" target="_blank" rel="noopener noreferrer">V2Ray 配置指南——WebSocket+TLS+Web</a>，但原文过于简略，于是决定写一篇详细的教程。</span></p>
+<p><span style="font-size: 12pt;">相关页面：<a href="https://www.v2ray.com/" target="_blank" rel="noopener noreferrer">Project V 官方网站</a>，<a href="https://github.com/v2ray/v2ray-core" target="_blank" rel="noopener noreferrer">GitHub</a>，<a href="https://steemit.com/@v2ray">V2Ray博客</a>，<a href="https://toutyrater.github.io/" target="_blank" rel="noopener noreferrer">白话文教程</a>，<a href="https://guide.v2fly.org/" target="_blank" rel="noopener noreferrer">新白话文教程</a></span></p>
+<p><span style="font-size: 12pt;">其他相关：<a href="https://ailitonia.com/archives/%e5%9c%a8centos-7%e4%b8%8a%e9%83%a8%e7%bd%b2google-bbr/" target="_blank" rel="noopener noreferrer">使用BBR优化加速</a>，<a href="https://ailitonia.com/archives/%e7%94%b3%e8%af%b7lets-encrypt%e5%85%8d%e8%b4%b9ssl%e8%af%81%e4%b9%a6/" target="_blank" rel="noopener noreferrer">SSL</a></span></p>
+<blockquote><p><span style="font-size: 10pt;">使用 Nginx/Caddy 是因为 VPS 已经有 Nginx/Caddy 可以将 V2Ray 稍作隐藏，使用 WebSocket 是因为搭配 Nginx/Caddy 只能用 WebSocket，使用 TLS 是因为可以流量加密，看起来更像 HTTPS，这可甩搞 400 错误跳转几条街了。</span></p></blockquote>
+<p><span style="font-size: 12pt;">思路很简单，利用TLS来传输数据，nginx反代v2ray后端，能实现443端口网站梯子共存。</span></p>
+<blockquote><p><span style="font-size: 10pt;"><strong>·</strong> 开启了 TLS 之后 path 参数是被加密的，GFW 看不到；</span></p>
+<p><span style="font-size: 10pt;"><strong>·</strong> 主动探测一个 path 产生 Bad request 不能证明是 V2Ray；</span></p>
+<p><span style="font-size: 10pt;"><strong>·</strong> 不安全的因素在于人，自己的问题就不要甩锅，哪怕我把示例中的 path 改成一个 UUID，依然有不少人原封不动地 COPY；</span></p>
+<p><span style="font-size: 10pt;"><strong>·</strong> 使用 Header 分流并不比 path 安全， 不要迷信。</span></p></blockquote>
+<h1><div class="dw-box dw-box-block"><i class="dwicon-block"></i>一、原理</div></h1>
+<p><span style="font-size: 12pt;">在开始我们的操作之前，先来讲讲我们为什么要这样做。</span></p>
+<p><span style="font-size: 12pt;">在墙越来越严格的封锁下，如何伪装梯子的流量是个重要的问题。V2Ray给我们提供了一个很好的方法，那就是TLS。TLS这就不多解释了，真不知道的请查看<a href="https://zh.wikipedia.org/zh-cn/%E5%82%B3%E8%BC%B8%E5%B1%A4%E5%AE%89%E5%85%A8%E6%80%A7%E5%8D%94%E5%AE%9A" target="_blank" rel="noopener noreferrer">wiki：传输层安全性协议</a>。</span></p>
+<p><span style="font-size: 12pt;">但是单纯的使用V2Ray的TLS功能，其流量特征仍然与常规网站的流量有所区别。但TLS这么好的一个玩意儿，我们肯定要在上面做点文章的，好在V2Ray给了我们另外一条路，那就是WebSocket。</span></p>
+<p><span style="font-size: 12pt;">这里也不过多解释WebSocket，想了解的自己看<a href="https://zh.wikipedia.org/wiki/WebSocket" target="_blank" rel="noopener noreferrer">wiki：WebSocket</a>。简单地说，它也是一种TCP通信协议，并且能与HTTP兼容，WebSocket能与HTTP(S)一同使用80和443端口，更更更重要的是，ws能够被CDN转发，这正是我们想要的。</span></p>
+<p><span style="font-size: 12pt;">具体的步骤是这样的：</span></p>
+<p><span style="font-size: 12pt;">首先，服务器应当有一个正常运行的网站。当然，你也可以使用已有的网站，如果只是个人使用，这样做并不会额外增加太多的流量开销。</span></p>
+<p><span style="font-size: 12pt;">然后，我们需要配置TLS，不过，我们不使用V2Ray的TLS模块，而是使用web服务器的TLS。本人使用的是nginx，这里也以它为例。</span></p>
+<p><span style="font-size: 12pt;">当我们为网站配置了TLS之后，我们访问网站的流量均会通过TLS加密。这与V2Ray有什么关系呢？关键就在nginx服务器上。nginx不仅是一个优秀的网页服务器，它还能作为反向代理服务器使用。nginx同样是支持WebSocket协议的，我们完全可以利用nginx的location正则规则，把特定的流量转发给V2Ray。</span></p>
+<p><span style="font-size: 12pt;">我们将V2Ray的传输层设置为WebSocket，端口为443端口。这样一来，在TLS的加密下，外界看来，正常访问网页的流量和V2Ray的流量就几乎没有任何区别，而数据的转发则是由服务器端的nginx在内网中来完成的，这使得我们的伪装几乎没有被发现的可能。由于V2Ray使用的是标准的WebSocket协议，我们甚至还能在为网站开启CDN加速的同时，正常使用V2Ray，简直因缺思厅。</span></p>
+<p><span style="font-size: 12pt;">用两张图来简单地表示一下这个过程：</span></p>
+<p><a href="https://ailitonia.com/wp-content/uploads/2018/03/bg2017051503.jpg" data-rel="lightbox-gallery-QHheDFpm" data-rl_title="" data-rl_caption="" title="" data-lightbox-gallery="lightbox-gallery-QHhe"><img class="alignnone wp-image-688 size-medium" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/bg2017051503-300x224.jpg" alt="" width="300" height="224" srcset="https://ailitonia.com/wp-content/uploads/2018/03/bg2017051503-300x224.jpg 300w, https://ailitonia.com/wp-content/uploads/2018/03/bg2017051503.jpg 418w" sizes="(max-width: 300px) 100vw, 300px"></a><a href="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180301_174338.png" data-rel="lightbox-gallery-QHheDFpm" data-rl_title="" data-rl_caption="" title="" data-lightbox-gallery="lightbox-gallery-QHhe"><img class="alignnone wp-image-691 size-large" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/snipaste20180301_174338-1024x271.png" alt="" width="820" height="217" srcset="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180301_174338-1024x271.png 1024w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180301_174338-300x79.png 300w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180301_174338-768x203.png 768w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180301_174338.png 1552w" sizes="(max-width: 820px) 100vw, 820px"></a></p>
+<h1><div class="dw-box dw-box-block"><i class="dwicon-block"></i>二、准备工作</div></h1>
+<p><span style="font-size: 12pt;">本文使用的是CentOS 7 x64，其他的应该没什么区别。</span></p>
+<h2><div class="dw-box dw-box-yellow"><i class="dwicon-yellow"></i><span style="color: #ffffff;"><strong>1. lnmp</strong></span></div></h2>
+<div class="dw-box dw-box-info"><i class="dwicon-info"></i><span style="font-size: 12pt;">有的小鸡没有需要也没有必要安装php和mysql，只需要nginx就够了，参见<a href="https://ailitonia.com/archives/centos-7-nginx%e5%ae%89%e8%a3%85%e4%b8%8e%e9%85%8d%e7%bd%ae/" target="_blank" rel="noopener noreferrer">这篇文章</a></span></div>
+<p><span style="font-size: 12pt;">依然是LNMP一键安装脚本，可以点<a href="https://lnmp.org/" target="_blank" rel="noopener noreferrer">这里</a>查看详情。</span></p>
+<pre class="pure-highlightjs"><code class="null hljs nginx"><span class="hljs-comment">#安装Screen和wget</span>
+<span class="hljs-attribute">yum</span> install -y screen wget
+
+<span class="hljs-comment">#建立一个screen</span>
+screen -S lnmp
+
+<span class="hljs-comment">#下载并安装LNMP一键安装包（目前1.5是最新稳定版）</span>
+wget http://soft.vpser.net/lnmp/lnmp1.5.tar.gz -cO lnmp1.<span class="hljs-number">5</span>.tar.gz
+tar zxf lnmp1.<span class="hljs-number">5</span>.tar.gz
+cd lnmp1.<span class="hljs-number">5</span> 
+./install.sh lnmp
+
+<span class="hljs-comment">#创建虚拟主机</span>
+lnmp vhost add</code></pre>
+<p>&nbsp;</p>
+<h2><div class="dw-box dw-box-yellow"><i class="dwicon-yellow"></i><strong><span style="color: #ffffff;">2. 网页</span></strong></div></h2>
+<p><span style="font-size: 12pt;">建立一个表面上的网站，用于伪装。当然就用现有的网站也行。</span></p>
+<p><span style="font-size: 12pt;">就使用wordpress吧，装wp步骤就省了，这个太简单了。</span></p>
+<p><span style="font-size: 12pt;">再设置一下主题，随便发点文章。这样，我们的网站就建好了！</span></p>
+<p><span style="font-size: 12pt;">等等，建一个网站，这还只是开始……</span></p>
+<h2><div class="dw-box dw-box-yellow"><i class="dwicon-yellow"></i><strong><span style="color: #ffffff;">3. V2Ray</span></strong></div></h2>
+<p><span style="font-size: 12pt;">安装V2Ray，使用官方提供的安装脚本：</span></p>
+<pre class="pure-highlightjs"><code class="null hljs cpp">bash &lt;(curl -L -s https:<span class="hljs-comment">//install.direct/go.sh)</span></code></pre>
+<p>&nbsp;</p>
+<p><span style="font-size: 12pt;">此脚本会自动安装以下文件：</span></p>
+<pre class="pure-highlightjs"><code class="null hljs dts"><span class="hljs-meta-keyword">/usr/</span>bin<span class="hljs-meta-keyword">/v2ray/</span>v2ray  <span class="hljs-meta">#V2Ray 程序；</span>
+<span class="hljs-meta-keyword">/usr/</span>bin<span class="hljs-meta-keyword">/v2ray/</span>v2ctl  <span class="hljs-meta">#V2Ray 工具；</span>
+<span class="hljs-meta-keyword">/etc/</span>v2ray/config.json  <span class="hljs-meta">#配置文件；</span>
+<span class="hljs-meta-keyword">/usr/</span>bin<span class="hljs-meta-keyword">/v2ray/</span>geoip.dat  <span class="hljs-meta">#IP 数据文件</span>
+<span class="hljs-meta-keyword">/usr/</span>bin<span class="hljs-meta-keyword">/v2ray/</span>geosite.dat  <span class="hljs-meta">#域名数据文件</span></code></pre>
+<p>&nbsp;</p>
+<p><span style="font-size: 12pt;">此脚本会配置自动运行脚本。自动运行脚本会在系统重启之后，自动运行 V2Ray。目前自动运行脚本只支持带有 Systemd 的系统，以及 Debian / Ubuntu 全系列。</span></p>
+<h1><div class="dw-box dw-box-block"><i class="dwicon-block"></i>三、配置</div></h1>
+<h2><div class="dw-box dw-box-yellow"><i class="dwicon-yellow"></i><strong><span style="color: #ffffff;">1. 配置Nginx</span></strong></div></h2>
+<h3><strong><span style="color: #ffcc99;">1.1 申请SSL证书</span></strong></h3>
+<div class="dw-box dw-box-tip"><i class="dwicon-tip"></i><span style="font-size: 12pt;">使用现有网站且已经部署了SSL的可以跳过这一部分。</span></div>
+<p><span style="font-size: 12pt;">申请证书前请先确保你有一个域名。不想花钱可以参考<del>：教你申请.tk/.ml/.cf/.gq/.ga等免费域名</del>（参考链接已挂，懒得自己补教程了，申请免费域名直接去这个网站→<a href="https://www.freenom.com/">freenom</a>，注册后可直接申请.tk/.ml/.cf/.gq/.ga等免费域名，一次性可续12个月。PS：请保证免费域名下面挂有网站，不然免费域名会被回收的）</span></p>
+<p><span style="font-size: 12pt;">使用<a href="https://github.com/Neilpang/acme.sh" target="_blank" rel="noopener noreferrer">acme.sh</a>脚本申请<a href="https://letsencrypt.org/" target="_blank" rel="noopener noreferrer">Let’s Encrypt</a>免费证书。</span></p>
+<p><span style="font-size: 12pt;">其实我以前并没有用过acme.sh，而是用的certbot，详见<a href="https://ailitonia.com/archives/%e7%94%b3%e8%af%b7lets-encrypt%e5%85%8d%e8%b4%b9ssl%e8%af%81%e4%b9%a6/" target="_blank" rel="noopener noreferrer">这篇文章</a>，这些脚本大同小异，使用就看个人爱好了。</span></p>
+<p><span style="font-size: 12pt; color: #ffcc99;">安装acme.sh：</span></p>
+<pre class="pure-highlightjs"><code class="null hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/Neilpang/acme.sh.git
+<span class="hljs-built_in">cd</span> ./acme.sh
+./acme.sh --install</code></pre>
+<p>&nbsp;</p>
+<p><span style="font-size: 12pt;">安装成功后执行</span></p>
+<pre class="pure-highlightjs"><code class="null hljs bash"><span class="hljs-built_in">source</span> ~/.bashrc</code></pre>
+<p>&nbsp;</p>
+<p><span style="font-size: 12pt;">以确保脚本所设置的命令别名生效。</span></p>
+<p><span style="font-size: 12pt;">另外在CentOS中，acme还需要socat tool作为依赖：</span></p>
+<pre class="pure-highlightjs"><code class="null hljs nginx"><span class="hljs-attribute">yum</span> install -y socat nohup</code></pre>
+<p>&nbsp;</p>
+<p><strong><span style="font-size: 12pt;">&nbsp;</span></strong><span style="font-size: 12pt; color: #ffcc99;">生成证书：</span></p>
+<blockquote><p><span style="font-size: 10pt;">证书有两种，一种是 ECC 证书（内置公钥是 ECDSA 公钥），一种是 RSA 证书（内置 RSA 公钥）。简单来说，同等长度 ECC 比 RSA 更安全,也就是说在具有同样安全性的情况下，ECC 的密钥长度比 RSA 短得多（加密解密会更快）。但问题是 ECC 的兼容性会差一些，Android 4.x 以下和 Windows XP 不支持。只要您的设备不是非常老的老古董，强烈建议使用 ECC 证书。</span></p></blockquote>
+<pre class="pure-highlightjs"><code class="null hljs bash">./acme.sh --issue --standalone <span class="hljs-_">-d</span> example.com --keylength ec-256</code></pre>
+<p>&nbsp;</p>
+<blockquote><p><span style="font-size: 10pt;">-k 表示密钥长度，后面的值可以是 ec-256 、ec-384、2048、3072、4096、8192，带有 ec 表示生成的是 ECC 证书，没有则是 RSA 证书。在安全性上 256 位的 ECC 证书等同于 3072 位的 RSA 证书。</span></p></blockquote>
+<p><span style="font-size: 12pt;">执行前请确保你的域名已经被解析到该服务器的ip上了。</span></p>
+<p><span style="font-size: 12pt;">使用此命令会使用80端口，请保证80端口未被占用。</span></p>
+<p><span style="font-size: 12pt;">如果Nginx已经配置完成，则可以使用nginx兼容模式，无需考虑80端口占用：</span></p>
+<pre class="pure-highlightjs"><code class="null hljs bash">./acme.sh --issue --nginx <span class="hljs-_">-d</span> example.com&nbsp;--keylength ec-256</code></pre>
+<p>&nbsp;</p>
+<blockquote><p><span style="font-size: 10pt;">This nginx mode is only to issue the cert, it will not change your nginx config files. You will need to configure your website config files to use the cert by yourself. We don’t want to mess your nginx server, don’t worry.</span></p></blockquote>
+<p><span style="font-size: 12pt; color: #ffcc99;">更新证书：</span></p>
+<p><span style="font-size: 12pt;">Let’s Encrypt 的证书有效期只有 3 个月，因此需要 90 天至少要更新一次证书，acme.sh 脚本会每 60 天自动更新证书。也可以手动更新。</span></p>
+<p><span style="font-size: 12pt;">手动更新 ECC 证书，执行：</span></p>
+<pre class="pure-highlightjs"><code class="null hljs bash">./acme.sh --renew <span class="hljs-_">-d</span> mydomain.com --force --ecc</code></pre>
+<p>&nbsp;</p>
+<p><span style="font-size: 12pt;">如果是 RSA 证书则执行：</span></p>
+<pre class="pure-highlightjs"><code class="null hljs bash">./acme.sh --renew <span class="hljs-_">-d</span> mydomain.com --force</code></pre>
+<p>&nbsp;</p>
+<p><span style="font-size: 12pt; color: #ffcc99;">安装证书：</span></p>
+<p><span style="font-size: 12pt;">将证书和密钥安装到 /etc/v2ray 中：</span></p>
+<pre class="pure-highlightjs"><code class="null hljs dts">./acme.sh --installcert -d mydomain.me --fullchainpath <span class="hljs-meta-keyword">/etc/</span>v2ray/v2ray.crt --keypath <span class="hljs-meta-keyword">/etc/</span>v2ray/v2ray.key</code></pre>
+<p>&nbsp;</p>
+<p>ECC证书则：</p>
+<pre class="pure-highlightjs"><code class="null hljs dts">./acme.sh --installcert -d mydomain.me --fullchainpath <span class="hljs-meta-keyword">/etc/</span>v2ray/v2ray.crt --keypath <span class="hljs-meta-keyword">/etc/</span>v2ray/v2ray.key --ecc</code></pre>
+<p>&nbsp;</p>
+<p>注：有人反映ECC用上面那条就行了，–ecc 不用加，加了就寻址寻ecc文件夹了。本人不负责任地猜测可能最开始安装证书时自定义证书路径有关，请自行按情况使用。</p>
+<h3><strong><span style="color: #ffcc99;">1.2 Nginx主机配置</span></strong></h3>
+<p><span style="font-size: 12pt;">修改网站的nginx配置文件，lnmp安装默认的配置文件在 /usr/local/nginx/conf/vhost/example.com 当中。</span></p>
+<p><span style="font-size: 12pt;">将配置文件的头部改为：</span></p>
+<p>&nbsp;</p>
+<pre class="pure-highlightjs"><code class="nginx hljs"><span class="hljs-section">server</span> {
+    <span class="hljs-attribute">listen</span>  <span class="hljs-number">443</span> ssl;
+    <span class="hljs-attribute">listen</span> [::]:<span class="hljs-number">443</span> ssl; <span class="hljs-comment">#如果启用了ipv6</span>
+    <span class="hljs-attribute">ssl</span> <span class="hljs-literal">on</span>;
+    <span class="hljs-attribute">ssl_certificate</span>       /etc/v2ray/v2ray.crt;
+    <span class="hljs-attribute">ssl_certificate_key</span>   /etc/v2ray/v2ray.key;
+    <span class="hljs-attribute">ssl_protocols</span>         TLSv1 TLSv1.<span class="hljs-number">1</span> TLSv1.<span class="hljs-number">2</span>;
+    <span class="hljs-attribute">ssl_ciphers</span>           HIGH:!aNULL:!MD5;
+    <span class="hljs-attribute">server_name</span>           example.com;
+}</code></pre>
+<p>&nbsp;</p>
+<p><a href="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180301_185336.png" data-rel="lightbox-gallery-QHheDFpm" data-rl_title="" data-rl_caption="" title="" data-lightbox-gallery="lightbox-gallery-QHhe"><img class="alignnone wp-image-697 size-large" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/snipaste20180301_185336-1024x438.png" alt="" width="820" height="351" srcset="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180301_185336-1024x438.png 1024w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180301_185336-300x128.png 300w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180301_185336-768x329.png 768w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180301_185336.png 1052w" sizes="(max-width: 820px) 100vw, 820px"></a></p>
+<p><span style="font-size: 12pt;">可以在配置文件底部添加跳转强制使用HTTPS：</span></p>
+<p>&nbsp;</p>
+<pre class="pure-highlightjs"><code class="nginx hljs"><span class="hljs-section">server</span> {
+    <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span> default_server;
+    <span class="hljs-attribute">listen</span> [::]:<span class="hljs-number">80</span> default_server;
+
+    <span class="hljs-attribute">server_name</span> test.com;
+    <span class="hljs-attribute">rewrite</span><span class="hljs-regexp"> ^(.*)</span> https://<span class="hljs-variable">$server_name</span><span class="hljs-variable">$1</span> <span class="hljs-literal">permanent</span>;
+}</code></pre>
+<p>&nbsp;</p>
+<p><a href="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180301_190044.png" data-rel="lightbox-gallery-QHheDFpm" data-rl_title="" data-rl_caption="" title="" data-lightbox-gallery="lightbox-gallery-QHhe"><img class="alignnone wp-image-701 size-large" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/snipaste20180301_190044-1024x532.webp" alt="" width="820" height="426" srcset="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180301_190044-1024x532.png 1024w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180301_190044-300x156.png 300w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180301_190044-768x399.png 768w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180301_190044.png 1202w" sizes="(max-width: 820px) 100vw, 820px"></a></p>
+<div class="dw-box dw-box-tip"><i class="dwicon-tip"></i><span style="font-size: 12pt;">SSL配置完成后，接着配置反代和服务端</span></div>
+<p><span style="font-size: 12pt; color: #ffcc99;">配置nginx反向代理：</span></p>
+<p><span style="font-size: 12pt;">在网站配置文件中添加location匹配规则：</span></p>
+<p>&nbsp;</p>
+<pre class="pure-highlightjs"><code class="nginx hljs">    <span class="hljs-attribute">location</span> /v2ray {
+    <span class="hljs-attribute">proxy_redirect</span> <span class="hljs-literal">off</span>;
+    <span class="hljs-comment">#后端错误重定向</span>
+    <span class="hljs-attribute">proxy_intercept_errors</span> <span class="hljs-literal">on</span>;
+    <span class="hljs-attribute">error_page</span> <span class="hljs-number">400</span> = https://你的域名/;
+    <span class="hljs-attribute">proxy_pass</span> http://127.0.0.1:5050; <span class="hljs-comment">#假设WebSocket监听端口为5050</span>
+    <span class="hljs-attribute">proxy_http_version</span> <span class="hljs-number">1</span>.<span class="hljs-number">1</span>;
+    <span class="hljs-attribute">proxy_set_header</span> Upgrade <span class="hljs-variable">$http_upgrade</span>;
+    <span class="hljs-attribute">proxy_set_header</span> Connection <span class="hljs-string">"upgrade"</span>;
+    <span class="hljs-attribute">proxy_set_header</span> Host <span class="hljs-variable">$http_host</span>;
+    <span class="hljs-comment"># 向后端传递访客ip</span>
+    <span class="hljs-attribute">proxy_set_header</span> X-Real-IP <span class="hljs-variable">$remote_addr</span>;
+    <span class="hljs-attribute">proxy_set_header</span> X-Forwarded-For <span class="hljs-variable">$proxy_add_x_forwarded_for</span>;
+}</code></pre>
+<p>&nbsp;</p>
+<p><a href="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180301_192300.png" data-rel="lightbox-gallery-QHheDFpm" data-rl_title="" data-rl_caption="" title="" data-lightbox-gallery="lightbox-gallery-QHhe"><img class="alignnone wp-image-703 size-large" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/snipaste20180301_192300-1024x619.webp" alt="" width="820" height="496" srcset="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180301_192300-1024x619.png 1024w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180301_192300-300x181.png 300w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180301_192300-768x464.png 768w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180301_192300.png 1162w" sizes="(max-width: 820px) 100vw, 820px"></a></p>
+<p><span style="font-size: 12pt;">其中”/v2ray”可以是任意的随机字符。</span></p>
+<p><span style="font-size: 12pt;">这段规则的意思就是，如果访问https://example.com/v2ray，则转发给本机的5050端口。</span></p>
+<p><span style="font-size: 12pt;">这里就是区分流量的关键步骤。<span style="word-spacing: normal;">我们指定V2Ray的目标地址为这个地址即可，但</span><span style="word-spacing: normal;">如果使用浏览器访问这个地址，就只会返回502或者400错误。这个地址完全可以直接使用生成的随机字符串，这样就能在不干扰网站正常运行的情况下，实现分流。</span></span></p>
+<p><span style="font-size: 12pt;">重启nginx服务，nginx服务器就配置好了。</span></p>
+<div class="dw-box dw-box-warning"><i class="dwicon-warning"></i><span style="font-size: 12pt;">如果使用Caddy，那么可以参考以下配置</span></div>
+<p><span style="font-size: 12pt;">安装Caddy：</span></p>
+<pre class="pure-highlightjs"><code class="null hljs nginx"><span class="hljs-attribute">curl</span> https://getcaddy.com | bash -s personal
+
+<span class="hljs-comment">#或者</span>
+wget -qO- https://getcaddy.com | bash -s personal</code></pre>
+<p>&nbsp;</p>
+<p><span style="font-size: 12pt;">因为 Caddy 会自动申请证书并自动更新，所以使用 Caddy 不用指定证书、密钥。</span></p>
+<pre class="pure-highlightjs"><code class="json hljs">mydomain.me
+{
+  log ./caddy.log
+  proxy /ray localhost:5050 {
+    websocket
+    header_upstream -Origin
+  }
+}</code></pre>
+<p>&nbsp;</p>
+<div class="dw-box dw-box-warning"><i class="dwicon-warning"></i><span style="font-size: 12pt;">如果使用Apache，那么可以参考以下配置</span></div>
+<pre class="pure-highlightjs"><code class="apache hljs"><span class="hljs-section">&lt;VirtualHost *:443&gt;</span>
+  <span class="hljs-attribute"><span class="hljs-nomarkup">ServerName</span></span> mydomain.me
+  <span class="hljs-attribute">SSLCertificateFile</span> /etc/v2ray/v2ray.crt
+  <span class="hljs-attribute">SSLCertificateKeyFile</span> /etc/v2ray/v2ray.key
+  
+  <span class="hljs-attribute">SSLProtocol</span> -<span class="hljs-literal">All</span> +TLSv1 +TLSv1.1 +TLSv1.2
+  <span class="hljs-attribute">SSLCipherSuite</span> HIGH:!aNULL
+  
+  <span class="hljs-section">&lt;Location "/ray/"&gt;</span>
+    <span class="hljs-attribute">ProxyPass</span> ws://127.0.0.1:5050/ray/ upgrade=WebSocket
+    <span class="hljs-attribute">ProxyAddHeaders</span> <span class="hljs-literal">Off</span>
+    <span class="hljs-attribute">ProxyPreserveHost</span> <span class="hljs-literal">On</span>
+    <span class="hljs-attribute">RequestHeader</span> append X-Forwarded-For <span class="hljs-variable">%{REMOTE_ADDR}</span>s
+  <span class="hljs-section">&lt;/Location&gt;</span>
+<span class="hljs-section">&lt;/VirtualHost&gt;</span></code></pre>
+<p>&nbsp;</p>
+<h2><div class="dw-box dw-box-yellow"><i class="dwicon-yellow"></i><strong><span style="color: #ffffff;">2.配置V2Ray</span></strong></div></h2>
+<p><span style="font-size: 12pt;">修改V2Ray配置文件：</span></p>
+<pre class="pure-highlightjs"><code class="json hljs">vim /etc/v<span class="hljs-number">2</span>ray/config.json</code></pre>
+<p>&nbsp;</p>
+<h3><span style="color: #ffcc99;">服务器端按如下配置：</span></h3>
+<pre class="pure-highlightjs"><code class="json hljs">{
+  "<span class="hljs-attr">inbounds</span>": [
+    {
+      "<span class="hljs-attr">port</span>": <span class="hljs-number">5050</span>,
+      "<span class="hljs-attr">listen</span>": <span class="hljs-string">"127.0.0.1"</span>,  //只监听 127.0.0.1，避免除本机外的机器探测到开放了 5050 端口
+      "<span class="hljs-attr">protocol</span>": <span class="hljs-string">"vmess"</span>,
+      "<span class="hljs-attr">settings</span>": {
+        "<span class="hljs-attr">clients</span>": [
+          {
+            "<span class="hljs-attr">id</span>": <span class="hljs-string">"xxxxxxxx-1234-5678-90ab-XXXXXXXXXXXX"</span>,
+            "<span class="hljs-attr">alterId</span>": <span class="hljs-number">64</span>
+          }
+        ]
+      },
+      "<span class="hljs-attr">streamSettings</span>": {
+        "<span class="hljs-attr">network</span>": <span class="hljs-string">"ws"</span>,  //使用WebSocket协议
+        "<span class="hljs-attr">wsSettings</span>": {
+          "<span class="hljs-attr">path</span>": <span class="hljs-string">"/v2ray"</span>  //这里指定的路径一定要与Nginx配置中匹配规则的路径一致
+        }
+      }
+    }
+  ],
+  "<span class="hljs-attr">outbounds</span>": [
+    {
+      "<span class="hljs-attr">protocol</span>": <span class="hljs-string">"freedom"</span>
+    }
+  ]
+}</code></pre>
+<p>&nbsp;</p>
+<p><span style="font-size: 12pt;">重启服务端：</span></p>
+<pre class="pure-highlightjs"><code class="null hljs nginx"><span class="hljs-attribute">systemctl</span> restart v2ray</code></pre>
+<p>&nbsp;</p>
+<p><span style="font-size: 12pt;">服务端配置OK</span></p>
+<p><span style="color: #ffcc99;"><strong><span style="font-size: 12pt;">注意：</span></strong></span></p>
+<blockquote><p><span style="font-size: 10pt;"><span style="font-size: 10pt;">· 如果在设置完成之后不能成功使用，可能是由于 SElinux 机制(如果你是 CentOS 7 的用户请特别留意 SElinux 这一机制)阻止了 Nginx 转发向内网的数据。如果是这样的话，在 V2Ray 的日志里不会有访问信息，在 Nginx 的日志里会出现大量的 “Permission Denied” 字段，要解决这一问题需要在终端下键入以下命令：</span></span></p>
+<pre class="pure-highlightjs"><span style="font-size: 10pt;"><code class="null hljs nginx"><span class="hljs-attribute">setsebool</span> -P httpd_can_network_connect <span class="hljs-number">1</span></code></span></pre>
+<p><span style="font-size: 10pt;">· 请保持服务器和客户端的 wsSettings 严格一致，对于 V2Ray，/ray 和 /ray/ 是不一样的</span></p></blockquote>
+<h3><span style="color: #ffcc99;">客户端按如下配置：</span></h3>
+<pre class="pure-highlightjs"><code class="json hljs">{
+  "<span class="hljs-attr">inbounds</span>": [
+    {
+      "<span class="hljs-attr">port</span>": <span class="hljs-number">1080</span>,
+      "<span class="hljs-attr">listen</span>": <span class="hljs-string">"127.0.0.1"</span>,
+      "<span class="hljs-attr">protocol</span>": <span class="hljs-string">"socks"</span>,
+      "<span class="hljs-attr">settings</span>": {
+        "<span class="hljs-attr">auth</span>": <span class="hljs-string">"noauth"</span>,
+        "<span class="hljs-attr">udp</span>": <span class="hljs-literal">true</span>,  //启用udp
+        "<span class="hljs-attr">ip</span>": <span class="hljs-string">"127.0.0.1"</span>
+      }
+    }
+  ],
+  "<span class="hljs-attr">outbounds</span>": [
+    {
+      "<span class="hljs-attr">protocol</span>": <span class="hljs-string">"vmess"</span>,
+      "<span class="hljs-attr">settings</span>": {
+        "<span class="hljs-attr">vnext</span>": [
+          {
+            "<span class="hljs-attr">address</span>": <span class="hljs-string">"example.com"</span>,  //服务器域名
+            "<span class="hljs-attr">port</span>": <span class="hljs-number">443</span>,  //使用443端口
+            "<span class="hljs-attr">users</span>": [
+              {
+                "<span class="hljs-attr">id</span>": <span class="hljs-string">"xxxxxxxx-1234-5678-90ab-XXXXXXXXXXXx"</span>,  //与服务器保持一致
+                "<span class="hljs-attr">alterId</span>": <span class="hljs-number">64</span>
+              }
+            ]
+          }
+        ]
+      },
+      "<span class="hljs-attr">streamSettings</span>": {
+        "<span class="hljs-attr">network</span>": <span class="hljs-string">"ws"</span>,  //使用WebSocket协议
+        "<span class="hljs-attr">security</span>": <span class="hljs-string">"tls"</span>,
+        "<span class="hljs-attr">tlsSettings</span>": {
+          "<span class="hljs-attr">allowInsecure</span>": <span class="hljs-literal">false</span>
+        },
+        "<span class="hljs-attr">wsSettings</span>": {
+          "<span class="hljs-attr">path</span>": <span class="hljs-string">"/v2ray"</span>  //路径保证为匹配规则的一致
+        }
+      }
+    }
+  ]
+}</code></pre>
+<p>&nbsp;</p>
+<p><span style="font-size: 12pt;">以上配置都是基础的配置，路由、udp等功能请自行添加配置。</span></p>
+<h1><a name="cdn"></a><div class="dw-box dw-box-block"><i class="dwicon-block"></i>四、配置CDN加速</div></h1>
+<p><span style="font-size: 12pt;">最因缺思厅的部分来了，前面说到由于V2Ray使用的是标准的WebSocket协议，所以我们还能在为网站开启CDN加速的同时，正常使用V2Ray。这样不仅能<span style="color: #ffcc99;">提升服务器本体的隐蔽性</span>，还同样适合那些服务器<span style="color: #ffcc99;">IP被墙</span>却无法退款只能吃灰，以及对速度要求低只需要保证服务器不会动不动就被墙IP的人。</span></p>
+<p><span style="font-size: 12pt;">如果你的IP已经被墙了，那么可以用这种方式还能让你的被墙IP的服务器继续拿来做代理，如果你服务器还没有被墙，那么可以预防IP被墙。</span></p>
+<div class="dw-box dw-box-alert"><i class="dwicon-alert"></i><span style="font-size: 12pt;">通过加CDN的方式来链接代理服务器，<span style="font-size: 16pt;">可能</span>会导致速度下降</span></div>
+<div class="dw-box dw-box-warning"><i class="dwicon-warning"></i><span style="font-size: 12pt;">CDN不是必需的，请根据自己的需求决定是否开启</span></div>
+<p><span style="font-size: 12pt;">使用CDN加速后的速度取决于你与CDN之间的网络质量和CDN与你代理服务器之间的网络质量。反正别指望速度快，<span style="color: #ffcc99;">强行续命不可取</span>懂嘛……</span></p>
+<p><span style="font-size: 12pt;">这里介绍Cloudflare的CDN（免费），其他CDN就请自行了解吧，大概也差不了多少。</span></p>
+<div class="dw-box dw-box-warning"><i class="dwicon-warning"></i><span style="font-size: 12pt;">注意：以个人使用情况来看，Cloudflare的CDN对于电信、联通体验很好，移动、校园网极差，简直吃翔。</span></div>
+<p>附一张实际使用效果图：</p>
+<div id="attachment_1415" style="width: 830px" class="wp-caption alignnone"><a href="https://ailitonia.com/wp-content/uploads/2018/03/cloudflare_cdn_test.jpg" data-rel="lightbox-gallery-QHheDFpm" data-rl_title="" data-rl_caption="" title="" data-lightbox-gallery="lightbox-gallery-QHhe"><img aria-describedby="caption-attachment-1415" class="wp-image-1415 size-large" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/cloudflare_cdn_test-1024x595.jpg" alt="" width="820" height="476" srcset="https://ailitonia.com/wp-content/uploads/2018/03/cloudflare_cdn_test-1024x595.jpg 1024w, https://ailitonia.com/wp-content/uploads/2018/03/cloudflare_cdn_test-300x174.jpg 300w, https://ailitonia.com/wp-content/uploads/2018/03/cloudflare_cdn_test-768x446.jpg 768w, https://ailitonia.com/wp-content/uploads/2018/03/cloudflare_cdn_test.jpg 1223w" sizes="(max-width: 820px) 100vw, 820px"></a><p id="caption-attachment-1415" class="wp-caption-text">我的辣鸡校园电信20M宽带基本跑满了</p></div>
+<h2><div class="dw-box dw-box-yellow"><i class="dwicon-yellow"></i><strong><span style="color: #ffffff;">配置Cloudflare CDN</span></strong></div></h2>
+<p><span style="font-size: 12pt;">Cloudflare提供了免费的CDN加速套餐。</span></p>
+<p><span style="font-size: 12pt;">打开<a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer">Cloudflare官网</a>，<a href="https://www.cloudflare.com/a/login" target="_blank" rel="noopener noreferrer">登陆</a>或<a href="https://www.cloudflare.com/a/signup" target="_blank" rel="noopener noreferrer">注册</a>。</span></p>
+<p><span style="font-size: 12pt;">注册或登陆成功后，我们直接访问<a href="https://www.cloudflare.com/a/add-site" target="_blank" rel="noopener noreferrer">添加域名页面</a>，输入你要在CloudflareCDN添加的域名，然后点击AddSite按钮继续。</span></p>
+<p><a href="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_162910.jpg" data-rel="lightbox-gallery-QHheDFpm" data-rl_title="" data-rl_caption="" title="" data-lightbox-gallery="lightbox-gallery-QHhe"><img class="alignnone wp-image-1133 size-large" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/snipaste20180314_162910-1024x471.jpg" alt="" width="820" height="377" srcset="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_162910-1024x471.jpg 1024w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_162910-300x138.jpg 300w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_162910-768x353.jpg 768w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_162910.jpg 1130w" sizes="(max-width: 820px) 100vw, 820px"></a></p>
+<p><span style="font-size: 12pt;">点击Next按钮继续。</span></p>
+<p><a href="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_163116.jpg" data-rel="lightbox-gallery-QHheDFpm" data-rl_title="" data-rl_caption="" title="" data-lightbox-gallery="lightbox-gallery-QHhe"><img class="alignnone wp-image-1134 size-large" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/snipaste20180314_163116-1024x651.jpg" alt="" width="820" height="521" srcset="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_163116-1024x651.jpg 1024w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_163116-300x191.jpg 300w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_163116-768x488.jpg 768w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_163116.jpg 1131w" sizes="(max-width: 820px) 100vw, 820px"></a></p>
+<p><span style="font-size: 12pt;">选择第一个FREE套餐，并点击Confirm Plan继续。</span></p>
+<p><a href="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_163244.jpg" data-rel="lightbox-gallery-QHheDFpm" data-rl_title="" data-rl_caption="" title="" data-lightbox-gallery="lightbox-gallery-QHhe"><img class="alignnone wp-image-1135 size-large" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/snipaste20180314_163244-1024x457.jpg" alt="" width="820" height="366" srcset="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_163244-1024x457.jpg 1024w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_163244-300x134.jpg 300w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_163244-768x343.jpg 768w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_163244.jpg 1502w" sizes="(max-width: 820px) 100vw, 820px"></a></p>
+<p><span style="font-size: 12pt;">之后，会列出自动扫描到的DNS记录：</span></p>
+<p><a href="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_164032.jpg" data-rel="lightbox-gallery-QHheDFpm" data-rl_title="" data-rl_caption="" title="" data-lightbox-gallery="lightbox-gallery-QHhe"><img class="alignnone wp-image-1136 size-large" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/snipaste20180314_164032-1024x968.jpg" alt="" width="820" height="775" srcset="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_164032-1024x968.jpg 1024w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_164032-300x284.jpg 300w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_164032-768x726.jpg 768w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_164032.jpg 1338w" sizes="(max-width: 820px) 100vw, 820px"></a></p>
+<p><span style="font-size: 12pt;">黄色云朵表示该解析通过CDN访问，灰色云朵表示不通过CDN访问，点击云朵可以切换状态。</span></p>
+<p><span style="font-size: 12pt;">这里建议全部调为黄色云朵走CDN访问，隐藏网站真实IP地址。全站通过CDN访问可以有效防止网站真实IP泄漏，保护原站安全。</span></p>
+<p><span style="font-size: 12pt;">记录简单的话可以直接按默认条目。如果没有扫描出来原记录或要手动添加，建议至少添加@和www两条指向原网站IP的A记录，TTL默认。</span></p>
+<p><span style="font-size: 12pt;">确认完毕后点Continue继续。</span></p>
+<p><span style="font-size: 12pt;">到这一步，就会提醒你设置域名的DNS。</span></p>
+<p><a href="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_164445.jpg" data-rel="lightbox-gallery-QHheDFpm" data-rl_title="" data-rl_caption="" title="" data-lightbox-gallery="lightbox-gallery-QHhe"><img class="alignnone wp-image-1137 size-large" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/snipaste20180314_164445-1024x671.jpg" alt="" width="820" height="537" srcset="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_164445-1024x671.jpg 1024w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_164445-300x197.jpg 300w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_164445-768x503.jpg 768w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_164445.jpg 1320w" sizes="(max-width: 820px) 100vw, 820px"></a></p>
+<p><span style="font-size: 12pt;">我的域名是在namesilo上购买的，这里需要到自己域名的管理界面去修改DNS，例如截图里这就是要</span><span style="font-size: 16px; word-spacing: normal;">我</span><span style="font-size: 12pt; word-spacing: normal;">把前两个换成Cloudflare提供的，再把第三个删了。</span></p>
+<p><a href="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/snipaste20180314_165022.jpg" data-rel="lightbox-gallery-QHheDFpm" data-rl_title="" data-rl_caption="" title="" data-lightbox-gallery="lightbox-gallery-QHhe"><img class="alignnone wp-image-1138 size-full" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/snipaste20180314_165022.jpg" alt="" width="850" height="407" srcset="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_165022.jpg 850w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_165022-300x144.jpg 300w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_165022-768x368.jpg 768w" sizes="(max-width: 850px) 100vw, 850px"></a></p>
+<p><span style="font-size: 12pt;">修改好了之后就如下图所示一样，提示更新中。</span></p>
+<p><a href="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_165303.jpg" data-rel="lightbox-gallery-QHheDFpm" data-rl_title="" data-rl_caption="" title="" data-lightbox-gallery="lightbox-gallery-QHhe"><img class="alignnone wp-image-1139 size-large" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/snipaste20180314_165303-1024x174.jpg" alt="" width="820" height="139" srcset="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_165303-1024x174.jpg 1024w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_165303-300x51.jpg 300w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_165303-768x131.jpg 768w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_165303.jpg 1182w" sizes="(max-width: 820px) 100vw, 820px"></a></p>
+<p><span style="font-size: 12pt;">因为更换了DNS的原因，所以生效可能需要十几分钟到一整天。可以看到，Cloudflare正在等待DNS生效中。</span></p>
+<p><a href="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_165937.jpg" data-rel="lightbox-gallery-QHheDFpm" data-rl_title="" data-rl_caption="" title="" data-lightbox-gallery="lightbox-gallery-QHhe"><img class="alignnone wp-image-1140 size-large" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/snipaste20180314_165937-1024x609.jpg" alt="" width="820" height="488" srcset="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_165937-1024x609.jpg 1024w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_165937-300x178.jpg 300w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_165937-768x457.jpg 768w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_165937.jpg 1232w" sizes="(max-width: 820px) 100vw, 820px"></a></p>
+<p><span style="font-size: 12pt;">虽然说的是十几分钟到一整天，其实实际上是很快的。我只等了大概不到十分钟就生效了。</span></p>
+<p><a href="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_170245.jpg" data-rel="lightbox-gallery-QHheDFpm" data-rl_title="" data-rl_caption="" title="" data-lightbox-gallery="lightbox-gallery-QHhe"><img class="alignnone wp-image-1141 size-large" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/snipaste20180314_170245-1024x615.jpg" alt="" width="820" height="492" srcset="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_170245-1024x615.jpg 1024w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_170245-300x180.jpg 300w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_170245-768x461.jpg 768w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_170245.jpg 1278w" sizes="(max-width: 820px) 100vw, 820px"></a></p>
+<p><span style="font-size: 12pt;">接下来配置SSL，我们前面申请的是Let’s Encrypt的SSL证书，这是经受信任的根证书颁发机构所颁发的证书，因此我们在Crypto里面把SSL模式设置为Full SSL (Strict)：</span></p>
+<p><a href="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_171354.jpg" data-rel="lightbox-gallery-QHheDFpm" data-rl_title="" data-rl_caption="" title="" data-lightbox-gallery="lightbox-gallery-QHhe"><img class="alignnone wp-image-1142 size-large" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/snipaste20180314_171354-1024x604.jpg" alt="" width="820" height="484" srcset="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_171354-1024x604.jpg 1024w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_171354-300x177.jpg 300w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_171354-768x453.jpg 768w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_171354.jpg 1280w" sizes="(max-width: 820px) 100vw, 820px"></a></p>
+<p><span style="font-size: 12pt;">这个模式可以保证从客户端到Cloudflare和Cloudflare到服务器的全程SSL：</span></p>
+<p><a href="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/snipaste20180314_171631.jpg" data-rel="lightbox-gallery-QHheDFpm" data-rl_title="" data-rl_caption="" title="" data-lightbox-gallery="lightbox-gallery-QHhe"><img class="alignnone wp-image-1143 size-full" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/snipaste20180314_171631.jpg" alt="" width="946" height="294" srcset="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_171631.jpg 946w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_171631-300x93.jpg 300w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20180314_171631-768x239.jpg 768w" sizes="(max-width: 946px) 100vw, 946px"></a></p>
+<p><span style="font-size: 12pt;">这样基本上就OK了，Cloudflare的其他设置自行Google吧，很多的，这里就不详说了。</span></p>
+<p><span style="font-size: 12pt;">PS：如果设置了CDN后死活连不上，先检查一下WebSockets设置打开了没（不过这玩意是默认开启的，出问题多半也不会在这里）……</span></p>
+<p><a href="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20181206_215906.jpg" data-rel="lightbox-gallery-QHheDFpm" data-rl_title="" data-rl_caption="" title="" data-lightbox-gallery="lightbox-gallery-QHhe"><img class="alignnone size-large wp-image-2657" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/snipaste20181206_215906-1024x324.jpg" alt="" width="820" height="259" srcset="https://ailitonia.com/wp-content/uploads/2018/03/snipaste20181206_215906-1024x324.jpg 1024w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20181206_215906-300x95.jpg 300w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20181206_215906-768x243.jpg 768w, https://ailitonia.com/wp-content/uploads/2018/03/snipaste20181206_215906.jpg 1357w" sizes="(max-width: 820px) 100vw, 820px"></a></p>
+<h1><strong><div class="dw-box dw-box-block"><i class="dwicon-block"></i>五、完成</div></strong></h1>
+<h2><span style="font-size: 12pt;">Windows客户端</span></h2>
+<p><span style="font-size: 12pt;">V2RayN：<a href="https://github.com/2dust/v2rayN" target="_blank" rel="noopener noreferrer">Github</a></span></p>
+<p><span style="font-size: 12pt;">V2RayW：<a href="https://github.com/Cenmrev/V2RayW" target="_blank" rel="noopener noreferrer">Github</a></span></p>
+<p><span style="font-size: 12pt;">个人推荐使用V2RayN，带有UI界面和系统代理。虽然挺简单，但相比于core，还是方便很多的。</span></p>
+<h2><span style="font-size: 12pt;">Android客户端</span></h2>
+<p><span style="font-size: 12pt;">推荐使用<a href="https://github.com/2dust/v2rayNG" target="_blank" rel="noopener noreferrer">V2RayNG</a>，可在Google Play下载：</span></p>
+<p><a href="https://play.google.com/store/apps/details?id=com.v2ray.ang" target="_blank" rel="noopener noreferrer"><img class="alignnone wp-image-1413 " src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/play_en_badge_web_generic-300x116.webp" alt="" width="153" height="59" srcset="https://ailitonia.com/wp-content/uploads/2018/03/play_en_badge_web_generic-300x116.png 300w, https://ailitonia.com/wp-content/uploads/2018/03/play_en_badge_web_generic.png 646w" sizes="(max-width: 153px) 100vw, 153px"></a></p>
+<p><span style="font-size: 12pt;">所有的配置都完成了，运行V2Ray，享受吧！</span></p>
+<div class="clear"></div>
+<div class="clear"></div>
+<div class="post-contents entry-content"><br>本文被阅读了：5,224次</div><br>
+
+<div class="autorbox">
+<div class="autorhead"><img src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/da26988302b074fffcdf43de51dfe849.jpeg" alt="作者头像"></div>
+<div class="autorinfo"><strong><span style="font-size: 12.5pt;">关于 &nbsp;Ailitonia</span></strong><br><br>正因站在了巨人的肩膀上，才越发觉得自己渺小。不求成为巨人，但求与其同行。
+把自己所见所闻，记录下来。<br><br><a href="https://ailitonia.com/archives/author/ailitonia/" target="_blank" rel="noopener">→查看所有由Ailitonia发布的文章</a></div>
+</div>
+</div>
+<br class="clear">
+</div>
+<div class="article_nav"><div class="next navbutton"><a href="https://ailitonia.com/archives/shadowsocksr-%e6%9c%8d%e5%8a%a1%e7%ab%af%e5%ae%89%e8%a3%85%e6%95%99%e7%a8%8b/" rel="next">Next Post<i class="fa fa-angle-double-right"></i></a></div><div class="previous navbutton"><a href="https://ailitonia.com/archives/%e7%a7%91%e6%8a%80%e6%a0%91%e7%82%b9%e6%ad%aa%e7%b3%bb%e5%88%97-%e3%80%8a%e5%bc%82%e6%98%9f%e6%ad%a7%e9%80%94the-road-not-taken-%e3%80%8b/" rel="prev"><i class="fa fa-angle-double-left"></i>Previous Post</a></div><br class="clear"></div> <hr>
+<div class="comments">
+<h3 id="comments">
+17 Responses to 密码保护：V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装	</h3>
+<ol class="commentlist">
+<li class="comment even thread-even depth-1 parent" id="comment-229">
+<div id="div-comment-229" class="comment-body">
+<div class="comment-author vcard">
+<img alt="" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/59469d4be3052839930ddc2cf2d65800.jpeg" srcset="https://secure.gravatar.com/avatar/59469d4be3052839930ddc2cf2d65800?s=128&amp;d=retro&amp;r=pg 2x" class="avatar avatar-64 photo" height="64" width="64"> <cite class="fn">halo</cite><span class="says">说道：</span> </div>
+<div class="comment-meta commentmetadata"><a href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/#comment-229">
+2019年12月30日 14:03 </a>
+</div>
+<p>正打算试着搭一个，多谢楼主的教程。<br>
+还有一个问题特别想问下，楼主是男孩子还是女孩子啊q(≧▽≦q)</p>
+<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/?replytocom=229#respond" data-commentid="229" data-postid="685" data-belowelement="div-comment-229" data-respondelement="respond" aria-label="回复给halo">回复</a></div>
+</div>
+<ul class="children">
+<li class="comment byuser comment-author-ailitonia bypostauthor odd alt depth-2 parent" id="comment-230">
+<div id="div-comment-230" class="comment-body">
+<div class="comment-author vcard">
+<img alt="" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/da26988302b074fffcdf43de51dfe849(1).jpeg" srcset="https://secure.gravatar.com/avatar/da26988302b074fffcdf43de51dfe849?s=128&amp;d=retro&amp;r=pg 2x" class="avatar avatar-64 photo" height="64" width="64"> <cite class="fn"><a href="https://ailitonia.com/" rel="external nofollow ugc" class="url">Ailitonia</a></cite><span class="says">说道：</span> </div>
+<div class="comment-meta commentmetadata"><a href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/#comment-230">
+2019年12月30日 14:26 </a>
+</div>
+<p>当然是男孩子啊(*/ω＼*)</p>
+<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/?replytocom=230#respond" data-commentid="230" data-postid="685" data-belowelement="div-comment-230" data-respondelement="respond" aria-label="回复给Ailitonia">回复</a></div>
+</div>
+<ul class="children">
+<li class="comment even depth-3" id="comment-232">
+<div id="div-comment-232" class="comment-body">
+<div class="comment-author vcard">
+<img alt="" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/59469d4be3052839930ddc2cf2d65800.jpeg" srcset="https://secure.gravatar.com/avatar/59469d4be3052839930ddc2cf2d65800?s=128&amp;d=retro&amp;r=pg 2x" class="avatar avatar-64 photo" height="64" width="64"> <cite class="fn">halo</cite><span class="says">说道：</span> </div>
+<div class="comment-meta commentmetadata"><a href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/#comment-232">
+2019年12月31日 14:53 </a>
+</div>
+<p>哈哈哈哈，男孩子有点可爱啊(●ˇ∀ˇ●)</p>
+<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/?replytocom=232#respond" data-commentid="232" data-postid="685" data-belowelement="div-comment-232" data-respondelement="respond" aria-label="回复给halo">回复</a></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="comment odd alt thread-odd thread-alt depth-1 parent" id="comment-225">
+<div id="div-comment-225" class="comment-body">
+<div class="comment-author vcard">
+<img alt="" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/c03056887292513fd81cc54e2668a039" srcset="https://secure.gravatar.com/avatar/c03056887292513fd81cc54e2668a039?s=128&amp;d=retro&amp;r=pg 2x" class="avatar avatar-64 photo" height="64" width="64"> <cite class="fn">f'd</cite><span class="says">说道：</span> </div>
+<div class="comment-meta commentmetadata"><a href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/#comment-225">
+2019年12月16日 15:14 </a>
+</div>
+<p>一定要安装LNMP吗?只安装 Nginx可以用吗?</p>
+<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/?replytocom=225#respond" data-commentid="225" data-postid="685" data-belowelement="div-comment-225" data-respondelement="respond" aria-label="回复给f&#39;d">回复</a></div>
+</div>
+<ul class="children">
+<li class="comment byuser comment-author-ailitonia bypostauthor even depth-2" id="comment-226">
+<div id="div-comment-226" class="comment-body">
+<div class="comment-author vcard">
+<img alt="" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/da26988302b074fffcdf43de51dfe849(1).jpeg" srcset="https://secure.gravatar.com/avatar/da26988302b074fffcdf43de51dfe849?s=128&amp;d=retro&amp;r=pg 2x" class="avatar avatar-64 photo" height="64" width="64"> <cite class="fn"><a href="https://ailitonia.com/" rel="external nofollow ugc" class="url">Ailitonia</a></cite><span class="says">说道：</span> </div>
+<div class="comment-meta commentmetadata"><a href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/#comment-226">
+2019年12月18日 23:46 </a>
+</div>
+<p>当然可以啊，没有建站需求只用一个nginx就够了</p>
+<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/?replytocom=226#respond" data-commentid="226" data-postid="685" data-belowelement="div-comment-226" data-respondelement="respond" aria-label="回复给Ailitonia">回复</a></div>
+</div>
+</li>
+</ul>
+</li>
+<li class="comment odd alt thread-even depth-1 parent" id="comment-145">
+<div id="div-comment-145" class="comment-body">
+<div class="comment-author vcard">
+<img alt="" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/ee2b87fc2e7dfd55e147bbedda373813" srcset="https://secure.gravatar.com/avatar/ee2b87fc2e7dfd55e147bbedda373813?s=128&amp;d=retro&amp;r=pg 2x" class="avatar avatar-64 photo" height="64" width="64"> <cite class="fn"><a href="https://www.jim.org/" rel="external nofollow ugc" class="url">jim</a></cite><span class="says">说道：</span> </div>
+<div class="comment-meta commentmetadata"><a href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/#comment-145">
+2019年10月3日 10:48 </a>
+</div>
+<p>博主，文中一会端口是443，一会是433。这个433是不是笔误？</p>
+<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/?replytocom=145#respond" data-commentid="145" data-postid="685" data-belowelement="div-comment-145" data-respondelement="respond" aria-label="回复给jim">回复</a></div>
+</div>
+<ul class="children">
+<li class="comment byuser comment-author-ailitonia bypostauthor even depth-2" id="comment-183">
+<div id="div-comment-183" class="comment-body">
+<div class="comment-author vcard">
+<img alt="" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/da26988302b074fffcdf43de51dfe849(1).jpeg" srcset="https://secure.gravatar.com/avatar/da26988302b074fffcdf43de51dfe849?s=128&amp;d=retro&amp;r=pg 2x" class="avatar avatar-64 photo" height="64" width="64"> <cite class="fn"><a href="https://ailitonia.com/" rel="external nofollow ugc" class="url">Ailitonia</a></cite><span class="says">说道：</span> </div>
+<div class="comment-meta commentmetadata"><a href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/#comment-183">
+2019年10月5日 15:25 </a>
+</div>
+<p>是笔误，已经改了</p>
+<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/?replytocom=183#respond" data-commentid="183" data-postid="685" data-belowelement="div-comment-183" data-respondelement="respond" aria-label="回复给Ailitonia">回复</a></div>
+</div>
+</li>
+</ul>
+</li>
+<li class="comment odd alt thread-odd thread-alt depth-1 parent" id="comment-133">
+<div id="div-comment-133" class="comment-body">
+<div class="comment-author vcard">
+<img alt="" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/ee2b87fc2e7dfd55e147bbedda373813" srcset="https://secure.gravatar.com/avatar/ee2b87fc2e7dfd55e147bbedda373813?s=128&amp;d=retro&amp;r=pg 2x" class="avatar avatar-64 photo" height="64" width="64"> <cite class="fn"><a href="http://www.jim.org/" rel="external nofollow ugc" class="url">jim</a></cite><span class="says">说道：</span> </div>
+<div class="comment-meta commentmetadata"><a href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/#comment-133">
+2019年10月2日 10:41 </a>
+</div>
+<p>启动nginx失败：<br>
+Failed to start nginx.service: Unit nginx.service is masked.<br>
+这是什么原因？</p>
+<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/?replytocom=133#respond" data-commentid="133" data-postid="685" data-belowelement="div-comment-133" data-respondelement="respond" aria-label="回复给jim">回复</a></div>
+</div>
+<ul class="children">
+<li class="comment byuser comment-author-ailitonia bypostauthor even depth-2" id="comment-182">
+<div id="div-comment-182" class="comment-body">
+<div class="comment-author vcard">
+<img alt="" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/da26988302b074fffcdf43de51dfe849(1).jpeg" srcset="https://secure.gravatar.com/avatar/da26988302b074fffcdf43de51dfe849?s=128&amp;d=retro&amp;r=pg 2x" class="avatar avatar-64 photo" height="64" width="64"> <cite class="fn"><a href="https://ailitonia.com/" rel="external nofollow ugc" class="url">Ailitonia</a></cite><span class="says">说道：</span> </div>
+<div class="comment-meta commentmetadata"><a href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/#comment-182">
+2019年10月5日 15:25 </a>
+</div>
+<p>请检查nginx安装：nginx -V<br>
+或尝试使用：systemctl unmask nginx.service<br>
+还不行就请google</p>
+<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/?replytocom=182#respond" data-commentid="182" data-postid="685" data-belowelement="div-comment-182" data-respondelement="respond" aria-label="回复给Ailitonia">回复</a></div>
+</div>
+</li>
+</ul>
+</li>
+<li class="comment odd alt thread-even depth-1 parent" id="comment-132">
+<div id="div-comment-132" class="comment-body">
+<div class="comment-author vcard">
+<img alt="" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/ee2b87fc2e7dfd55e147bbedda373813" srcset="https://secure.gravatar.com/avatar/ee2b87fc2e7dfd55e147bbedda373813?s=128&amp;d=retro&amp;r=pg 2x" class="avatar avatar-64 photo" height="64" width="64"> <cite class="fn"><a href="http://www.jim.org/" rel="external nofollow ugc" class="url">jim</a></cite><span class="says">说道：</span> </div>
+<div class="comment-meta commentmetadata"><a href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/#comment-132">
+2019年10月2日 09:35 </a>
+</div>
+<p>请教，就您现在这个例子，使用cdn加速后，v2ray 客户端和服务器端的配置文件要做如何修改？</p>
+<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/?replytocom=132#respond" data-commentid="132" data-postid="685" data-belowelement="div-comment-132" data-respondelement="respond" aria-label="回复给jim">回复</a></div>
+</div>
+<ul class="children">
+<li class="comment byuser comment-author-ailitonia bypostauthor even depth-2" id="comment-181">
+<div id="div-comment-181" class="comment-body">
+<div class="comment-author vcard">
+<img alt="" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/da26988302b074fffcdf43de51dfe849(1).jpeg" srcset="https://secure.gravatar.com/avatar/da26988302b074fffcdf43de51dfe849?s=128&amp;d=retro&amp;r=pg 2x" class="avatar avatar-64 photo" height="64" width="64"> <cite class="fn"><a href="https://ailitonia.com/" rel="external nofollow ugc" class="url">Ailitonia</a></cite><span class="says">说道：</span> </div>
+<div class="comment-meta commentmetadata"><a href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/#comment-181">
+2019年10月5日 15:21 </a>
+</div>
+<p>不需要修改，使用cdn之前是什么样使用cdn之后也是什么样</p>
+<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/?replytocom=181#respond" data-commentid="181" data-postid="685" data-belowelement="div-comment-181" data-respondelement="respond" aria-label="回复给Ailitonia">回复</a></div>
+</div>
+</li>
+</ul>
+</li>
+<li class="comment odd alt thread-odd thread-alt depth-1 parent" id="comment-119">
+<div id="div-comment-119" class="comment-body">
+<div class="comment-author vcard">
+<img alt="" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/8c7349896dc482d32625efe290db7ee0" srcset="https://secure.gravatar.com/avatar/8c7349896dc482d32625efe290db7ee0?s=128&amp;d=retro&amp;r=pg 2x" class="avatar avatar-64 photo" height="64" width="64"> <cite class="fn"><a href="http://ss.pythonic.life/" rel="external nofollow ugc" class="url">a</a></cite><span class="says">说道：</span> </div>
+<div class="comment-meta commentmetadata"><a href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/#comment-119">
+2019年9月26日 00:38 </a>
+</div>
+<p>请问apache应该如何配置呢？我配置apache的时候总是无法正确转发</p>
+<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/?replytocom=119#respond" data-commentid="119" data-postid="685" data-belowelement="div-comment-119" data-respondelement="respond" aria-label="回复给a">回复</a></div>
+</div>
+<ul class="children">
+<li class="comment byuser comment-author-ailitonia bypostauthor even depth-2" id="comment-120">
+<div id="div-comment-120" class="comment-body">
+<div class="comment-author vcard">
+<img alt="" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/da26988302b074fffcdf43de51dfe849(1).jpeg" srcset="https://secure.gravatar.com/avatar/da26988302b074fffcdf43de51dfe849?s=128&amp;d=retro&amp;r=pg 2x" class="avatar avatar-64 photo" height="64" width="64"> <cite class="fn"><a href="https://ailitonia.com/" rel="external nofollow ugc" class="url">Ailitonia</a></cite><span class="says">说道：</span> </div>
+<div class="comment-meta commentmetadata"><a href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/#comment-120">
+2019年9月27日 10:00 </a>
+</div>
+<p>抱歉，我对apache不是很熟悉，你可以参考这个社区指南（https://guide.v2fly.org/advanced/wss_and_web.html#服务器配置）里的服务器apache配置部分。</p>
+<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/?replytocom=120#respond" data-commentid="120" data-postid="685" data-belowelement="div-comment-120" data-respondelement="respond" aria-label="回复给Ailitonia">回复</a></div>
+</div>
+</li>
+</ul>
+</li>
+<li class="comment odd alt thread-even depth-1 parent" id="comment-117">
+<div id="div-comment-117" class="comment-body">
+<div class="comment-author vcard">
+<img alt="" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/a171a09277f5b00dd80a011b2183b705" srcset="https://secure.gravatar.com/avatar/a171a09277f5b00dd80a011b2183b705?s=128&amp;d=retro&amp;r=pg 2x" class="avatar avatar-64 photo" height="64" width="64"> <cite class="fn">伊恒</cite><span class="says">说道：</span> </div>
+<div class="comment-meta commentmetadata"><a href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/#comment-117">
+2019年9月22日 14:18 </a>
+</div>
+<p>不会搞啊，LZ，CDN和域名都注册了，用的谷歌云建的V2RAY，不知道怎么把几块实现在一起，最近老被墙，没办法 想整个一劳永逸 安全点的方法！怎么办呐？</p>
+<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/?replytocom=117#respond" data-commentid="117" data-postid="685" data-belowelement="div-comment-117" data-respondelement="respond" aria-label="回复给伊恒">回复</a></div>
+</div>
+<ul class="children">
+<li class="comment byuser comment-author-ailitonia bypostauthor even depth-2" id="comment-118">
+<div id="div-comment-118" class="comment-body">
+<div class="comment-author vcard">
+<img alt="" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/da26988302b074fffcdf43de51dfe849(1).jpeg" srcset="https://secure.gravatar.com/avatar/da26988302b074fffcdf43de51dfe849?s=128&amp;d=retro&amp;r=pg 2x" class="avatar avatar-64 photo" height="64" width="64"> <cite class="fn"><a href="https://ailitonia.com/" rel="external nofollow ugc" class="url">Ailitonia</a></cite><span class="says">说道：</span> </div>
+<div class="comment-meta commentmetadata"><a href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/#comment-118">
+2019年9月23日 01:08 </a>
+</div>
+<p>v2ray+ws+tls+CDN基本上是目前最安全的方法了……<br>
+先注册域名、然后安装nginx、再配置证书和nginx、之后安装和配置v2ray、最后再配置CDN。<br>
+不过，如果连vim还不能熟练使用的话，这个配置起来的确对于初学者来说的确有些难度……<br>
+不过网上教程这么多，而且各有侧重，你为什么不多找几篇来对照着操作一下呢？</p>
+<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/?replytocom=118#respond" data-commentid="118" data-postid="685" data-belowelement="div-comment-118" data-respondelement="respond" aria-label="回复给Ailitonia">回复</a></div>
+</div>
+</li>
+</ul>
+</li>
+<li class="comment odd alt thread-odd thread-alt depth-1 parent" id="comment-92">
+<div id="div-comment-92" class="comment-body">
+<div class="comment-author vcard">
+<img alt="" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/686c5085ec13c774916844a0aa6c3cfb" srcset="https://secure.gravatar.com/avatar/686c5085ec13c774916844a0aa6c3cfb?s=128&amp;d=retro&amp;r=pg 2x" class="avatar avatar-64 photo" height="64" width="64"> <cite class="fn">方程</cite><span class="says">说道：</span> </div>
+<div class="comment-meta commentmetadata"><a href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/#comment-92">
+2019年8月2日 12:43 </a>
+</div>
+<p>是不是每次更新证书后，都要重新安装新证书到v2ray中？</p>
+<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/?replytocom=92#respond" data-commentid="92" data-postid="685" data-belowelement="div-comment-92" data-respondelement="respond" aria-label="回复给方程">回复</a></div>
+</div>
+<ul class="children">
+<li class="comment byuser comment-author-ailitonia bypostauthor even depth-2" id="comment-94">
+<div id="div-comment-94" class="comment-body">
+<div class="comment-author vcard">
+<img alt="" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/da26988302b074fffcdf43de51dfe849(1).jpeg" srcset="https://secure.gravatar.com/avatar/da26988302b074fffcdf43de51dfe849?s=128&amp;d=retro&amp;r=pg 2x" class="avatar avatar-64 photo" height="64" width="64"> <cite class="fn"><a href="https://ailitonia.com/" rel="external nofollow ugc" class="url">Ailitonia</a></cite><span class="says">说道：</span> </div>
+<div class="comment-meta commentmetadata"><a href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/#comment-94">
+2019年8月2日 19:25 </a>
+</div>
+<p>严格来说，证书并不是为v2ray申请的，而是为网站申请的。<br>
+更新证书是为了保证网站不会因为证书过期等错误导致不能正常访问（当然如果v2ray的tls配置allowInsecure为true的话可以忽略掉这个问题，不过既然申请的是正儿八经的的证书我不建议启用这个选项）。<br>
+因此，证书和nginx只要正常，只更新v2ray不会影响证书的使用；同样，只是更新证书也无需重新配置v2ray。</p>
+<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/?replytocom=94#respond" data-commentid="94" data-postid="685" data-belowelement="div-comment-94" data-respondelement="respond" aria-label="回复给Ailitonia">回复</a></div>
+</div>
+</li>
+</ul>
+</li>
+</ol>
+<div id="respond" class="comment-respond">
+<h3 id="reply-title" class="comment-reply-title">发表评论 <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://ailitonia.com/archives/v2ray%e5%88%a9%e7%94%a8websockettlsnginx%e5%ae%9e%e7%8e%b0%e6%b5%81%e9%87%8f%e4%bc%aa%e8%a3%85/#respond" style="display:none;">取消回复</a></small></h3><form action="https://ailitonia.com/wp-comments-post.php" method="post" id="commentform" class="comment-form"><p class="comment-notes"><span id="email-notes">电子邮件地址不会被公开。</span> 必填项已用<span class="required">*</span>标注</p><p class="comment-form-comment"><label for="comment">评论</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">姓名 <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required="required"></p>
+<p class="comment-form-email"><label for="email">电子邮件 <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" maxlength="100" aria-describedby="email-notes" required="required"></p>
+<p class="comment-form-url"><label for="url">站点</label> <input id="url" name="url" type="text" value="" size="30" maxlength="200"></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="发表评论"> <input type="hidden" name="comment_post_ID" value="685" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="560ce5ca7b"></p><p style="display: none;"></p><input type="hidden" id="ak_js" name="ak_js" value="1592025004640"></form> </div>
+</div>
+<div class="article_nav"><div class="next navbutton"><a href="https://ailitonia.com/archives/shadowsocksr-%e6%9c%8d%e5%8a%a1%e7%ab%af%e5%ae%89%e8%a3%85%e6%95%99%e7%a8%8b/" rel="next">Next Post<i class="fa fa-angle-double-right"></i></a></div><div class="previous navbutton"><a href="https://ailitonia.com/archives/%e7%a7%91%e6%8a%80%e6%a0%91%e7%82%b9%e6%ad%aa%e7%b3%bb%e5%88%97-%e3%80%8a%e5%bc%82%e6%98%9f%e6%ad%a7%e9%80%94the-road-not-taken-%e3%80%8b/" rel="prev"><i class="fa fa-angle-double-left"></i>Previous Post</a></div><br class="clear"></div> </div>
+</div>
+<div id="sub-footer">
+<div class="container">
+<div class="sub-footer-left">
+<p>
+Copyright © 2020, Ai.
+</p>
+</div>
+<div class="sub-footer-right">
+<div class="menu-%e5%ba%95%e9%83%a8%e5%af%bc%e8%88%aa-container"><ul id="menu-%e5%ba%95%e9%83%a8%e5%af%bc%e8%88%aa" class="menu"><li id="menu-item-1501" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-1501"><a href="https://ailitonia.com/">Home</a></li>
+<li id="menu-item-772" class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-772"><a href="https://ailitonia.com/news/">News</a></li>
+<li id="menu-item-773" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-773"><a href="https://ailitonia.com/about/">About</a></li>
+<li id="menu-item-1775" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-1775"><a href="https://ailitonia.com/about/privacy-policy/">Privacy</a></li>
+<li id="menu-item-1776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1776"><a href="https://ailitonia.com/about/copyright/">Copyright</a></li>
+</ul></div> </div>
+</div>
+</div>
+<script type="text/javascript">
+    /* 鼠标点击特效 */
+    var a_idx = 0;
+    jQuery(document).ready(function ($) {
+        $("body").click(function (e) {
+            var a = new Array("喵 ~  ฅ( ̳• ◡ • ̳)ฅ", "喵 ~  ฅ●ω●ฅ", "喵 ~  (ฅ>ω<*ฅ)", "喵 ~  ฅ'ω'ฅ", "喵 ~  (´ฅωฅ‘) ");
+            var $i = $("<span/>").text(a[a_idx]);
+            a_idx = (a_idx + 1) % a.length;
+            var x = e.pageX,
+                y = e.pageY;
+            $i.css({
+                "z-index": 9999999999999999999,
+                "top": y - 20,
+                "left": x,
+                "position": "absolute",
+                "font-weight": "bold",
+                "color": "#b8902b"
+            });
+            $("body").append($i);
+            $i.animate({
+                    "top": y - 180,
+                    "opacity": 0
+                },
+                1500,
+                function () {
+                    $i.remove();
+                });
+        });
+    });
+
+</script>
+</div>
+<script type="text/javascript" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/highlight.pack.js"></script>
+<script type="text/javascript" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/comment-reply.min.js"></script>
+<script type="text/javascript" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/wp-embed.min.js"></script>
+<script async="async" type="text/javascript" src="./V2Ray利用WebSocket+TLS+nginx+CDN实现流量伪装 – Ai_files/form.js"></script>
+
+<style type="text/css">
+.df_font{
+	font-size:12pt;
+}
+.df_back{
+	background:#444;
+}
+</style>
+
+
+
+</body></html>
