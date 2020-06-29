@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)https://www.v2ray.com/chapter_00/start.html -->
+<html lang="zh"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<title>新手上路 · Project V 官方网站</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<script async="" src="./新手上路 · Project V 官方网站_files/analytics.js"></script><script type="text/javascript">
+function inIframe () {
+    try { return window.self !== window.top; } catch (e) { return true; }
+}
+function isValidDomain() {
+    var host = window.location.hostname;
+    var domains = ['v2ray.com', 'github.io', 'mux.cool', 'v2ray.cool', 'archive.org'];
+    for (var dx in domains) {
+        if (host.indexOf(domains[dx]) >= 0) {
+            return true;
+        }
+    }
+    return false;
+}
+if (inIframe() || !isValidDomain()) {
+    window.top.location.href = 'https://www.v2ray.com/';
+}
+        </script>
+<link rel="stylesheet" href="./新手上路 · Project V 官方网站_files/style.css">
+<link rel="stylesheet" href="./新手上路 · Project V 官方网站_files/mermaid.css">
+<link rel="stylesheet" href="./新手上路 · Project V 官方网站_files/plugin.css">
+<link rel="stylesheet" href="./新手上路 · Project V 官方网站_files/prism-base16-ateliersulphurpool.light.css">
+<link rel="stylesheet" href="./新手上路 · Project V 官方网站_files/plugin-hints.css">
+<link rel="stylesheet" href="./新手上路 · Project V 官方网站_files/website.css">
+<meta name="HandheldFriendly" content="true">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="apple-touch-icon-precomposed" sizes="152x152" type="image/png" href="https://www.v2ray.com/resources/favicon-152.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" type="image/png" href="https://www.v2ray.com/resources/favicon-180.png">
+<link rel="icon" type="image/png" href="https://www.v2ray.com/resources/favicon-192.png">
+<link rel="shortcut icon" href="https://www.v2ray.com/resources/favicon.ico" type="image/x-icon">
+<link href="./新手上路 · Project V 官方网站_files/css" rel="stylesheet">
+
+
+<link rel="prev" href="https://www.v2ray.com/chapter_00/install.html"><link rel="next" href="https://www.v2ray.com/chapter_00/command.html"></head>
+<body>
+<div class="book without-animation with-summary">
+<div class="book-summary">
+<nav role="navigation">
+<ul class="summary">
+<li class="chapter " data-level="1.1" data-path="../">
+<a href="https://www.v2ray.com/">
+Project V
+</a>
+<ul class="articles">
+<li class="chapter " data-level="1.1.1" data-path="01_versions.html">
+<a href="https://www.v2ray.com/chapter_00/01_versions.html">
+版本历史
+</a>
+</li>
+<li class="chapter " data-level="1.1.2" data-path="workflow.html">
+<a href="https://www.v2ray.com/chapter_00/workflow.html">
+使用方式
+</a>
+</li>
+<li class="chapter " data-level="1.1.3" data-path="install.html">
+<a href="https://www.v2ray.com/chapter_00/install.html">
+下载安装
+</a>
+</li>
+<li class="chapter active" data-level="1.1.4" data-path="start.html">
+<a href="https://www.v2ray.com/chapter_00/start.html">
+新手上路
+</a>
+</li>
+<li class="chapter " data-level="1.1.5" data-path="command.html">
+<a href="https://www.v2ray.com/chapter_00/command.html">
+命令行参数
+</a>
+</li>
+<li class="chapter " data-level="1.1.6" data-path="02_donate.html">
+<a href="https://www.v2ray.com/chapter_00/02_donate.html">
+捐助支持
+</a>
+</li>
+<li class="chapter " data-level="1.1.7" data-path="help.html">
+<a href="https://www.v2ray.com/chapter_00/help.html">
+寻求帮助
+</a>
+</li>
+<li class="chapter " data-level="1.1.8" data-path="faq.html">
+<a href="https://www.v2ray.com/chapter_00/faq.html">
+常见问题
+</a>
+</li>
+<li class="chapter " data-level="1.1.9">
+<a target="_blank" href="https://steemit.com/@v2ray">
+博客↪
+</a>
+</li>
+<li class="chapter " data-level="1.1.10">
+<a target="_blank" href="https://toutyrater.github.io/">
+白话文教程↪
+</a>
+</li>
+<li class="chapter " data-level="1.1.11">
+<a target="_blank" href="https://guide.v2fly.org/">
+新白话文教程（社区版）↪
+</a>
+</li>
+</ul>
+</li>
+<li class="chapter " data-level="1.2" data-path="../chapter_02/">
+<a href="https://www.v2ray.com/chapter_02/">
+配置文件
+</a>
+<ul class="articles">
+<li class="chapter " data-level="1.2.1" data-path="../chapter_02/01_overview.html">
+<a href="https://www.v2ray.com/chapter_02/01_overview.html">
+文件格式
+</a>
+</li>
+<li class="chapter " data-level="1.2.2" data-path="../chapter_02/02_protocols.html">
+<a href="https://www.v2ray.com/chapter_02/02_protocols.html">
+协议列表
+</a>
+<ul class="articles">
+<li class="chapter " data-level="1.2.2.1" data-path="../chapter_02/protocols/blackhole.html">
+<a href="https://www.v2ray.com/chapter_02/protocols/blackhole.html">
+Blackhole
+</a>
+</li>
+<li class="chapter " data-level="1.2.2.2" data-path="../chapter_02/protocols/dns.html">
+<a href="https://www.v2ray.com/chapter_02/protocols/dns.html">
+DNS
+</a>
+</li>
+<li class="chapter " data-level="1.2.2.3" data-path="../chapter_02/protocols/dokodemo.html">
+<a href="https://www.v2ray.com/chapter_02/protocols/dokodemo.html">
+Dokodemo
+</a>
+</li>
+ <li class="chapter " data-level="1.2.2.4" data-path="../chapter_02/protocols/freedom.html">
+<a href="https://www.v2ray.com/chapter_02/protocols/freedom.html">
+Freedom
+</a>
+</li>
+<li class="chapter " data-level="1.2.2.5" data-path="../chapter_02/protocols/http.html">
+<a href="https://www.v2ray.com/chapter_02/protocols/http.html">
+HTTP
+</a>
+</li>
+<li class="chapter " data-level="1.2.2.6" data-path="../chapter_02/protocols/mtproto.html">
+<a href="https://www.v2ray.com/chapter_02/protocols/mtproto.html">
+MTProto
+</a>
+</li>
+<li class="chapter " data-level="1.2.2.7" data-path="../chapter_02/protocols/shadowsocks.html">
+<a href="https://www.v2ray.com/chapter_02/protocols/shadowsocks.html">
+Shadowsocks
+</a>
+</li>
+<li class="chapter " data-level="1.2.2.8" data-path="../chapter_02/protocols/socks.html">
+<a href="https://www.v2ray.com/chapter_02/protocols/socks.html">
+SOCKS
+</a>
+</li>
+<li class="chapter " data-level="1.2.2.9" data-path="../chapter_02/protocols/vmess.html">
+<a href="https://www.v2ray.com/chapter_02/protocols/vmess.html">
+VMess
+</a>
+</li>
+</ul>
+</li>
+<li class="chapter " data-level="1.2.3" data-path="../chapter_02/policy.html">
+<a href="https://www.v2ray.com/chapter_02/policy.html">
+本地策略
+</a>
+</li>
+<li class="chapter " data-level="1.2.4" data-path="../chapter_02/03_routing.html">
+<a href="https://www.v2ray.com/chapter_02/03_routing.html">
+路由配置
+</a>
+</li>
+<li class="chapter " data-level="1.2.5" data-path="../chapter_02/04_dns.html">
+<a href="https://www.v2ray.com/chapter_02/04_dns.html">
+DNS 配置
+</a>
+</li>
+<li class="chapter " data-level="1.2.6" data-path="../chapter_02/mux.html">
+<a href="https://www.v2ray.com/chapter_02/mux.html">
+Mux 配置
+</a>
+</li>
+<li class="chapter " data-level="1.2.7" data-path="../chapter_02/api.html">
+<a href="https://www.v2ray.com/chapter_02/api.html">
+API 配置
+</a>
+</li>
+<li class="chapter " data-level="1.2.8" data-path="../chapter_02/stats.html">
+<a href="https://www.v2ray.com/chapter_02/stats.html">
+统计信息
+</a>
+</li>
+<li class="chapter " data-level="1.2.9" data-path="../chapter_02/reverse.html">
+<a href="https://www.v2ray.com/chapter_02/reverse.html">
+反向代理
+</a>
+</li>
+<li class="chapter " data-level="1.2.10" data-path="../chapter_02/05_transport.html">
+<a href="https://www.v2ray.com/chapter_02/05_transport.html">
+传输配置
+</a>
+<ul class="articles">
+<li class="chapter " data-level="1.2.10.1" data-path="../chapter_02/transport/tcp.html">
+<a href="https://www.v2ray.com/chapter_02/transport/tcp.html">
+TCP
+</a>
+</li>
+<li class="chapter " data-level="1.2.10.2" data-path="../chapter_02/transport/mkcp.html">
+<a href="https://www.v2ray.com/chapter_02/transport/mkcp.html">
+mKCP
+</a>
+</li>
+<li class="chapter " data-level="1.2.10.3" data-path="../chapter_02/transport/websocket.html">
+<a href="https://www.v2ray.com/chapter_02/transport/websocket.html">
+WebSocket
+</a>
+</li>
+<li class="chapter " data-level="1.2.10.4" data-path="../chapter_02/transport/h2.html">
+<a href="https://www.v2ray.com/chapter_02/transport/h2.html">
+HTTP/2
+</a>
+</li>
+<li class="chapter " data-level="1.2.10.5" data-path="../chapter_02/transport/domainsocket.html">
+<a href="https://www.v2ray.com/chapter_02/transport/domainsocket.html">
+DomainSocket
+</a>
+</li>
+<li class="chapter " data-level="1.2.10.6" data-path="../chapter_02/transport/quic.html">
+<a href="https://www.v2ray.com/chapter_02/transport/quic.html">
+QUIC
+</a>
+</li>
+</ul>
+</li>
+<li class="chapter " data-level="1.2.11" data-path="../chapter_02/env.html">
+<a href="https://www.v2ray.com/chapter_02/env.html">
+环境变量
+</a>
+</li>
+</ul>
+</li>
+<li class="chapter " data-level="1.3" data-path="../awesome/tools.html">
+<a href="https://www.v2ray.com/awesome/tools.html">
+神一样的工具们
+</a>
+<ul class="articles">
+<li class="chapter " data-level="1.3.1" data-path="../awesome/ads.html">
+<a href="https://www.v2ray.com/awesome/ads.html">
+以及广告
+</a>
+</li>
+</ul>
+</li>
+<li class="chapter " data-level="1.4" data-path="../developer/">
+<a href="https://www.v2ray.com/developer/">
+开发人员手册
+</a>
+<ul class="articles">
+<li class="chapter " data-level="1.4.1" data-path="../developer/intro/roadmap.html">
+<a href="https://www.v2ray.com/developer/intro/roadmap.html">
+开发计划
+</a>
+</li>
+<li class="chapter " data-level="1.4.2" data-path="../developer/intro/guide.html">
+<a href="https://www.v2ray.com/developer/intro/guide.html">
+开发指引
+</a>
+</li>
+<li class="chapter " data-level="1.4.3" data-path="../developer/intro/design.html">
+<a href="https://www.v2ray.com/developer/intro/design.html">
+核心设计
+</a>
+</li>
+<li class="chapter " data-level="1.4.4" data-path="../developer/intro/compile.html">
+<a href="https://www.v2ray.com/developer/intro/compile.html">
+配置开发环境
+</a>
+</li>
+<li class="chapter " data-level="1.4.5" data-path="../developer/intro/tools.html">
+<a href="https://www.v2ray.com/developer/intro/tools.html">
+开发工具
+</a>
+</li>
+<li class="chapter " data-level="1.4.6">
+<span>
+协议细节
+</span>
+<ul class="articles">
+<li class="chapter " data-level="1.4.6.1" data-path="../developer/protocols/vmess.html">
+<a href="https://www.v2ray.com/developer/protocols/vmess.html">
+VMess 协议
+</a>
+</li>
+<li class="chapter " data-level="1.4.6.2" data-path="../developer/protocols/mkcp.html">
+<a href="https://www.v2ray.com/developer/protocols/mkcp.html">
+mKCP 协议
+</a>
+</li>
+<li class="chapter " data-level="1.4.6.3" data-path="../developer/protocols/muxcool.html">
+<a href="https://www.v2ray.com/developer/protocols/muxcool.html">
+Mux.Cool
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="divider"></li>
+<li>
+<a href="https://www.gitbook.com/" target="blank" class="gitbook-link">
+本書使用 GitBook 釋出
+</a>
+</li>
+</ul>
+</nav>
+</div>
+<div class="book-body">
+<div class="body-inner">
+<div class="book-header" role="navigation">
+<a class="btn pull-left js-toolbar-action" aria-label="" href="https://www.v2ray.com/chapter_00/start.html#"><i class="fa fa-align-justify"></i></a><a class="btn pull-left" href="https://www.v2ray.com/chapter_00/start.html" target="_blank">
+<img src="./新手上路 · Project V 官方网站_files/flag_cn.svg" alt="Chinese" height="16">
+</a>
+<a class="btn pull-left" href="https://www.v2ray.com/en/welcome/start.html" target="_blank">
+<img src="./新手上路 · Project V 官方网站_files/flag_en.svg" alt="English" height="16">
+</a>
+<a class="btn pull-left" href="https://www.v2ray.com/ru/welcome/start.html" target="_blank">
+<img src="./新手上路 · Project V 官方网站_files/flag_ru.svg" alt="Russian" height="16">
+</a>
+<a class="btn pull-left" href="https://www.v2ray.com/ko/welcome/start.html" target="_blank">
+<img src="./新手上路 · Project V 官方网站_files/flag_ko.svg" alt="Korean" height="16">
+</a>
+<a class="btn pull-left" href="https://www.v2ray.com/fa/welcome/start.html" target="_blank">
+<img src="./新手上路 · Project V 官方网站_files/flag_fa.svg" alt="Persian" height="16">
+</a>
+<a class="btn pull-left" href="https://www.v2ray.com/vi/welcome/start.html" target="_blank">
+<img src="./新手上路 · Project V 官方网站_files/flag_vi.svg" alt="Vietnamese" height="16">
+</a>
+<a class="btn pull-left" href="https://crowdin.com/project/v2ray" target="_blank">
+<img src="./新手上路 · Project V 官方网站_files/translate.png" alt="Translate" height="16">
+</a>
+</div>
+<div class="page-wrapper" tabindex="-1" role="main">
+ <div class="page-inner">
+<section class="normal markdown-section">
+<h1 id="新手上路"><a name="新手上路" class="plugin-anchor" href="https://www.v2ray.com/chapter_00/start.html#%E6%96%B0%E6%89%8B%E4%B8%8A%E8%B7%AF"><i class="fa fa-link" aria-hidden="true"></i></a>新手上路</h1>
+<p>在下载并安装了 V2Ray 之后，你需要对它进行一下配置。这里介绍一下简单的配置方式，只是为了演示，如需配置更复杂的功能，请参考后续的<a href="https://www.v2ray.com/chapter_02/01_overview.html">配置文件说明</a>。</p>
+<h2 id="client"><a name="client" class="plugin-anchor" href="https://www.v2ray.com/chapter_00/start.html#client"><i class="fa fa-link" aria-hidden="true"></i></a>客户端 </h2>
+<p>在你的 PC （或手机）中，你需要运行 V2Ray 并使用下面的配置：</p>
+<pre class="language-"><code class="lang-javascript"><span class="token punctuation">{</span>
+  <span class="token string">"inbounds"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+    <span class="token string">"port"</span><span class="token punctuation">:</span> <span class="token number">1080</span><span class="token punctuation">,</span>  <span class="token comment">// SOCKS 代理端口，在浏览器中需配置代理并指向这个端口</span>
+    <span class="token string">"listen"</span><span class="token punctuation">:</span> <span class="token string">"127.0.0.1"</span><span class="token punctuation">,</span>
+    <span class="token string">"protocol"</span><span class="token punctuation">:</span> <span class="token string">"socks"</span><span class="token punctuation">,</span>
+    <span class="token string">"settings"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token string">"udp"</span><span class="token punctuation">:</span> <span class="token boolean">true</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token string">"outbounds"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+    <span class="token string">"protocol"</span><span class="token punctuation">:</span> <span class="token string">"vmess"</span><span class="token punctuation">,</span>
+    <span class="token string">"settings"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token string">"vnext"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+        <span class="token string">"address"</span><span class="token punctuation">:</span> <span class="token string">"server"</span><span class="token punctuation">,</span> <span class="token comment">// 服务器地址，请修改为你自己的服务器 ip 或域名</span>
+        <span class="token string">"port"</span><span class="token punctuation">:</span> <span class="token number">10086</span><span class="token punctuation">,</span>  <span class="token comment">// 服务器端口</span>
+        <span class="token string">"users"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> <span class="token string">"id"</span><span class="token punctuation">:</span> <span class="token string">"b831381d-6324-4d53-ad4f-8cda48b30811"</span> <span class="token punctuation">}</span><span class="token punctuation">]</span>
+      <span class="token punctuation">}</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span>
+    <span class="token string">"protocol"</span><span class="token punctuation">:</span> <span class="token string">"freedom"</span><span class="token punctuation">,</span>
+    <span class="token string">"tag"</span><span class="token punctuation">:</span> <span class="token string">"direct"</span><span class="token punctuation">,</span>
+    <span class="token string">"settings"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token string">"routing"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token string">"domainStrategy"</span><span class="token punctuation">:</span> <span class="token string">"IPOnDemand"</span><span class="token punctuation">,</span>
+    <span class="token string">"rules"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+      <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"field"</span><span class="token punctuation">,</span>
+      <span class="token string">"ip"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"geoip:private"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token string">"outboundTag"</span><span class="token punctuation">:</span> <span class="token string">"direct"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>上述配置唯一要改的地方就是你的服务器 IP，配置中已注明。上述配置会把除了局域网（比如访问路由器）之外的所有流量转发到你的服务器。</p>
+<h2 id="server"><a name="server" class="plugin-anchor" href="https://www.v2ray.com/chapter_00/start.html#server"><i class="fa fa-link" aria-hidden="true"></i></a>服务器 </h2>
+<p>然后你需要一台防火墙外的服务器，来运行服务器端的 V2Ray。配置如下：</p>
+<pre class="language-"><code class="lang-javascript"><span class="token punctuation">{</span>
+  <span class="token string">"inbounds"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+    <span class="token string">"port"</span><span class="token punctuation">:</span> <span class="token number">10086</span><span class="token punctuation">,</span> <span class="token comment">// 服务器监听端口，必须和上面的一样</span>
+    <span class="token string">"protocol"</span><span class="token punctuation">:</span> <span class="token string">"vmess"</span><span class="token punctuation">,</span>
+    <span class="token string">"settings"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token string">"clients"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> <span class="token string">"id"</span><span class="token punctuation">:</span> <span class="token string">"b831381d-6324-4d53-ad4f-8cda48b30811"</span> <span class="token punctuation">}</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token string">"outbounds"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+    <span class="token string">"protocol"</span><span class="token punctuation">:</span> <span class="token string">"freedom"</span><span class="token punctuation">,</span>
+    <span class="token string">"settings"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>服务器的配置中需要确保 <code>id</code> 和端口与客户端一致，就可以正常连接了。</p>
+<h2 id="运行"><a name="运行" class="plugin-anchor" href="https://www.v2ray.com/chapter_00/start.html#%E8%BF%90%E8%A1%8C"><i class="fa fa-link" aria-hidden="true"></i></a>运行</h2>
+<ul>
+<li>在 Windows 和 macOS 中，配置文件通常是 V2Ray 同目录下的 <code>config.json</code> 文件。直接运行 <code>v2ray</code> 或 <code>v2ray.exe</code> 即可。</li>
+<li>在 Linux 中，配置文件通常位于 <code>/etc/v2ray/config.json</code> 文件。运行 <code>v2ray --config=/etc/v2ray/config.json</code>，或使用 systemd 等工具把 V2Ray 作为服务在后台运行。</li>
+</ul>
+<p>更多详见的说明可以参考<a href="https://toutyrater.github.io/" target="_blank">白话文教程</a>和<a href="https://www.v2ray.com/chapter_02/01_overview.html">配置文件说明</a>。</p>
+</section>
+</div>
+</div>
+</div>
+</div>
+<script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"refcn":"chapter_00/start","refen":"welcome/start","title":"新手上路","level":"1.1.4","depth":2,"next":{"title":"命令行参数","level":"1.1.5","depth":2,"path":"chapter_00/command.md","ref":"chapter_00/command.md","articles":[]},"previous":{"title":"下载安装","level":"1.1.3","depth":2,"path":"chapter_00/install.md","ref":"chapter_00/install.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-fontsettings","-search","-lunr","-highlight","-sharing","mermaid-gb3","anchors","ga","prism","prism-themes","hints"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"ga":{"configuration":"auto","token":"UA-73620536-1"},"prism":{"css":["prism-themes/themes/prism-base16-ateliersulphurpool.light.css"],"lang":{"objc":"objectivec","shell":"bash","text":"textile","plain":"textile"}},"mermaid-gb3":{},"anchors":{},"prism-themes":{},"hints":{"danger":"fa fa-exclamation-circle","info":"fa fa-info-circle","tip":"fa fa-mortar-board","working":"fa fa-wrench"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Project V 官方网站","language":"zh","gitbook":"*"},"file":{"path":"chapter_00/start.md","mtime":"2019-12-09T02:03:16.155Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-12-09T02:05:14.919Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+<script src="./新手上路 · Project V 官方网站_files/gitbook.js"></script>
+<script src="./新手上路 · Project V 官方网站_files/theme.js"></script>
+<script src="./新手上路 · Project V 官方网站_files/plugin.js"></script>
+<script src="./新手上路 · Project V 官方网站_files/plugin(1).js"></script>
+<script src="./新手上路 · Project V 官方网站_files/mermaid.min.js"></script>
+
+
+<audio controls="controls" style="display: none;"></audio></body><style type="text/css">#yddContainer{display:block;font-family:Microsoft YaHei;position:relative;width:100%;height:100%;top:-4px;left:-4px;font-size:12px;border:1px solid}#yddTop{display:block;height:22px}#yddTopBorderlr{display:block;position:static;height:17px;padding:2px 28px;line-height:17px;font-size:12px;color:#5079bb;font-weight:bold;border-style:none solid;border-width:1px}#yddTopBorderlr .ydd-sp{position:absolute;top:2px;height:0;overflow:hidden}.ydd-icon{left:5px;width:17px;padding:0px 0px 0px 0px;padding-top:17px;background-position:-16px -44px}.ydd-close{right:5px;width:16px;padding-top:16px;background-position:left -44px}#yddKeyTitle{float:left;text-decoration:none}#yddMiddle{display:block;margin-bottom:10px}.ydd-tabs{display:block;margin:5px 0;padding:0 5px;height:18px;border-bottom:1px solid}.ydd-tab{display:block;float:left;height:18px;margin:0 5px -1px 0;padding:0 4px;line-height:18px;border:1px solid;border-bottom:none}.ydd-trans-container{display:block;line-height:160%}.ydd-trans-container a{text-decoration:none;}#yddBottom{position:absolute;bottom:0;left:0;width:100%;height:22px;line-height:22px;overflow:hidden;background-position:left -22px}.ydd-padding010{padding:0 10px}#yddWrapper{color:#252525;z-index:10001;background:url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ab20.png);}#yddContainer{background:#fff;border-color:#4b7598}#yddTopBorderlr{border-color:#f0f8fc}#yddWrapper .ydd-sp{background-image:url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ydd-sprite.png)}#yddWrapper a,#yddWrapper a:hover,#yddWrapper a:visited{color:#50799b}#yddWrapper .ydd-tabs{color:#959595}.ydd-tabs,.ydd-tab{background:#fff;border-color:#d5e7f3}#yddBottom{color:#363636}#yddWrapper{min-width:250px;max-width:400px;}</style></html>
