@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<!-- saved from url=(0081)https://blog.systemctl.top/2017/2017-09-28_set-proxy-for-git-and-ssh-with-socks5/ -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>[整理]为 git 和 ssh 设置 socks5 协议的代理</title>
+  <link href="./[整理]为 git 和 ssh 设置 socks5 协议的代理_files/style.css" type="text/css" rel="stylesheet" media="screen,projection">
+  <link href="./[整理]为 git 和 ssh 设置 socks5 协议的代理_files/syntax-highlighter.css" type="text/css" rel="stylesheet" media="screen,projection">
+  <link href="./[整理]为 git 和 ssh 设置 socks5 协议的代理_files/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+  <style type="text/css">
+  
+    footer.page-footer{background-image: url(https://blog.systemctl.top/images/default.png);}
+  
+  </style>
+</head>
+<body style="position: static;">
+  <ul id="slide-out" class="side-nav" style="left: -250px;">
+    <li><a href="https://blog.systemctl.top/"><i class="mdi-action-home left"></i>Home<i class="mdi-hardware-keyboard-arrow-right right"></i></a></li>
+    <li><a href="https://blog.systemctl.top/categories"><i class="mdi-action-perm-media left"></i>Categories<i class="mdi-hardware-keyboard-arrow-right right"></i></a></li>
+    <li><a href="https://blog.systemctl.top/tags"><i class="mdi-action-loyalty left"></i>Tags<i class="mdi-hardware-keyboard-arrow-right right"></i></a></li>
+  </ul>
+  <div id="index-banner" class="parallax-container">
+  <a data-activates="slide-out" class="btn-floating button-collapse" style="top: 5px; left: 5px;"><i class="mdi-navigation-menu"></i></a>
+    <div class="section no-pad-bot">
+      <div class="container">
+        
+        <h1 class="header center teal-text text-lighten-2">黄家垚的主页</h1>
+        <div class="row center">
+          <h5 class="header col s12 light">我的第一个个人页面</h5>
+        </div>
+        <div class="row center">
+        
+          <a href="https://github.com/gileshuang"><img src="./[整理]为 git 和 ssh 设置 socks5 协议的代理_files/github2-dreamstale35.png"></a>
+        
+        
+          <a href="http://weibo.com/jiayaohuang1992"><img src="./[整理]为 git 和 ssh 设置 socks5 协议的代理_files/weibo-dreamstale55.png"></a>
+        
+        
+          <a href="https://git.oschina.net/aliendata"><img src="./[整理]为 git 和 ssh 设置 socks5 协议的代理_files/gitosc-dreamstale55.png"></a>
+        
+        
+          <a href="https://www.facebook.com/huangjiayao"><img src="./[整理]为 git 和 ssh 设置 socks5 协议的代理_files/facebook-dreamstale25.png"></a>
+        
+        
+          <a href="https://twitter.com/giles_huang"><img src="./[整理]为 git 和 ssh 设置 socks5 协议的代理_files/twitter-dreamstale71.png"></a>
+        
+        
+        
+          <a href="https://blog.systemctl.top/index.xml"><img src="./[整理]为 git 和 ssh 设置 socks5 协议的代理_files/feed-dreamstale27.png"></a>
+        </div>
+      </div>
+    </div>
+    <div class="parallax">
+    
+      <img src="./[整理]为 git 和 ssh 设置 socks5 协议的代理_files/default.png" style="display: block; transform: translate3d(-50%, 336px, 0px);">
+    
+    </div>
+  </div>
+
+
+
+<div class="container">
+  <div class="section">
+
+    <div class="row">
+      <div class="col s12">
+        <div class="card-panel">
+          <h4>[整理]为 git 和 ssh 设置 socks5 协议的代理</h4>
+          <p>
+          
+            
+              <a href="https://blog.systemctl.top/categories/%E8%BF%90%E7%BB%B4%E5%90%91/">运维向</a>
+            
+          
+          </p>
+          <p></p><p>由于某魔法结界的存在，我们在从某全球最大同性社交网站下载项目源码或者提交代码到该罪恶的社交网站时，
+经常会出现各种异常。那么，我们能不能施展魔法，让我们的 git/ssh 通过魔法上网呢？<br>
+（本文的配置并不是给浏览器用的，不适合用来给浏览器魔法上网。本文重点在 git/ssh，需要魔法上网的请绕道。）</p>
+<hr>
+<blockquote>
+<p>本文假设你已经有了一个 socks5 协议的代理了。<br>
+关于怎么设立 socks5 协议的代理，这里就不赘述了，到处都有介绍，这里说多了我怕我会被魔法封印。<br>
+本文以 Linux 环境下为准（我使用的是 ArchLinux）。
+Windows 下的 git-bash 同理，但未经验证。</p>
+</blockquote>
+<h4 id="1-">1. 需要解决什么问题？</h4>
+<ul>
+<li>某全球最大同性社交网站的 git clone/pull/push 操作主要使用 ssh、https 协议。</li>
+<li>因为某魔法结界的存在，上述网站经常各种抽风（无论啥协议都抽风）。</li>
+<li>某些网站虽然没受结界影响，但因网站自身问题或者各种水土不服，git 操作的速度特别慢，
+比如 <a href="https://git.kernel.org/">git.kernel.org</a>。</li>
+<li>首先知道，git 支持这些协议：ssh、http/https、git。</li>
+<li>你使用 ssh 直接登陆你自己的某台服务器会出现问题，但你理论上能通过你的 socks5 代理登陆你那台服务器，
+只是你不知道应该如何配置 ssh。</li>
+</ul>
+<h4 id="2-">2. 前置环境</h4>
+<ul>
+<li>你熟悉基础的 ssh、git 操作。</li>
+<li>你已经通过某些不可描述的方案，在本地建立好了 socks5 的代理了，这里以 <code>127.0.0.1:1081</code> 为例。</li>
+<li>你的 socks5 能够访问你的目标服务，比如能够访问魔法结界外面的同性社交网站或其它类似网站。</li>
+<li>已经安装了 ssh、git 客户端。</li>
+<li>安装了 ncat 命令（ArchLinux 中，该命令来自 nmap 包）。</li>
+</ul>
+<h4 id="3--ssh--ssh--git-">3. 为 ssh 客户端或者使用 ssh 协议的 git 配置代理</h4>
+<p>在你用户目录下，建立 <code>.ssh/config</code>，在里面添加如下配置：</p>
+<pre><code class="hljs vala"><span class="hljs-meta"># 将这里的 User、Hostname、Port 替换成你需要用 ssh 登录的服务器的配置。</span>
+<span class="hljs-meta"># Host 可以认为像是书签一样的东西，当你用 Host 指明的字符串代替你服务器的 IP/域名 时，</span>
+<span class="hljs-meta"># 便会应用该节点下的配置。当然你也可以将 Host 和 Hostname 设置成一样。</span>
+Host yourserver.com
+        User    someone
+        Hostname        yourserver.com
+        Port    <span class="hljs-number">22</span>
+        Proxycommand    /usr/bin/ncat --proxy <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">1081</span> --proxy-type socks5 %h %p
+
+<span class="hljs-meta"># 如果是给某同性社交网站用的（走 ssh 协议），可以直接使用该配置。</span>
+<span class="hljs-meta"># 其它类似网站的话，替换掉域名（ Host/Hostname）即可。</span>
+<span class="hljs-meta"># 可以看出，ssh 协议的 git 客户端，配置与 ssh 一模一样。</span>
+<span class="hljs-meta"># 需要注意的是这里的 User 应该是 git，而不是你在该网站上注册的用户名。</span>
+<span class="hljs-meta"># （虽然有些提供 git 仓库托管的网站会用其它用户名，这种情况根据网站配置。）</span>
+Host github.com
+        User    git
+        Hostname        github.com
+        Port    <span class="hljs-number">22</span>
+        Proxycommand    /usr/bin/ncat --proxy <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">1081</span> --proxy-type socks5 %h %p
+</code></pre><p>该方式的配置中，如果 Host 设置为 <code>*</code>，那么 <code>Host *</code> 对应的配置会被应用到所有没有独立配置
+的 ssh 连接中，包括使用了 ssh 协议的 git 操作。</p>
+<h4 id="4--httphttps--git-">4. 为使用 http/https 协议的 git 配置代理</h4>
+<p>针对 git 全局开启 http/https 协议代理：</p>
+<pre><code class="hljs matlab">git config --<span class="hljs-keyword">global</span> http.proxy <span class="hljs-string">'socks5://127.0.0.1:1081'</span>
+git config --<span class="hljs-keyword">global</span> https.proxy <span class="hljs-string">'socks5://127.0.0.1:1081'</span>
+</code></pre><p>这是针对全局开启，一般在 <code>git clone</code> 时用处较大。
+针对单个仓库的话，在 clone 完成后，进入仓库目录下设置，去掉 <code>--global</code> 参数即可。</p>
+<h4 id="5--git--git-">5. 为使用 git 协议的 git 配置代理</h4>
+<p>建立 <code>/opt/bin/socks5proxywrapper</code> 文件，并将该文件设置为可执行权限，文件内容如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash hljs" data-lang="bash"><span style="color:#75715e"><span class="hljs-meta">#!/bin/sh</span>
+</span><span style="color:#75715e"></span>/usr/bin/ncat --proxy 127.0.0.1:1081 --proxy-type socks5 <span style="color:#e6db74"><span class="hljs-string">"</span></span><span class="hljs-string"><span class="hljs-variable">$@</span></span><span style="color:#e6db74"><span class="hljs-string">"</span></span>
+</code></pre></div><p>配置 git，使其全局使用该代理：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash hljs" data-lang="bash">git config --global core.gitProxy <span style="color:#e6db74"><span class="hljs-string">'/opt/bin/socks5proxywrapper'</span></span>
+</code></pre></div><p>也可针对特定域名启用代理，如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash hljs" data-lang="bash">git config --global core.gitProxy <span style="color:#e6db74"><span class="hljs-string">'/opt/bin/socks5proxywrapper for git.kernel.org'</span></span>
+</code></pre></div><p>临时启用代理而不想将配置保存下来的话，可以使用设置环境变量的方法：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash hljs" data-lang="bash"><span class="hljs-built_in">export</span> GIT_PROXY_COMMAND<span style="color:#f92672">=</span>/opt/bin/socks5proxywrapper
+</code></pre></div><h4 id="6-">6. 参考链接</h4>
+<p>本文只是摘选了其中一部分配置。<br>
+不管是哪一个协议，git 的代理都有非常多的方式可以配置，灵活性也很大。这里摘选的大部分是比较简单
+粗暴的配置，而且响应主题：使用 socks5 协议。<br>
+如果有兴趣，可以 <code>man git-config</code> 看看，或者 google 上找找别人的经验之谈。<br>
+这里给出我写本文的几个参考链接：</p>
+<p><a href="https://blog.fazero.me/2015/07/11/%e7%94%a8shadowsocks%e5%8a%a0%e9%80%9fgit-clone/">https://blog.fazero.me/2015/07/11/%e7%94%a8shadowsocks%e5%8a%a0%e9%80%9fgit-clone/</a><br>
+<a href="https://segmentfault.com/q/1010000000118837">https://segmentfault.com/q/1010000000118837</a></p><p></p>
+          <p>28 Sep 2017
+            
+              
+                <a href="https://blog.systemctl.top/tags/linux/">#Linux</a>
+              
+                <a href="https://blog.systemctl.top/tags/socks5/">#socks5</a>
+              
+                <a href="https://blog.systemctl.top/tags/ssh/">#ssh</a>
+              
+                <a href="https://blog.systemctl.top/tags/git/">#git</a>
+              
+            
+          </p>
+          
+          
+          
+          <div id="gitment"><div lang="en-US" class="gitment-container gitment-root-container"><div><div lang="en-US" class="gitment-container gitment-header-container"><span class="gitment-header-like-btn">
+    <svg class="gitment-heart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M25 39.7l-.6-.5C11.5 28.7 8 25 8 19c0-5 4-9 9-9 4.1 0 6.4 2.3 8 4.1 1.6-1.8 3.9-4.1 8-4.1 5 0 9 4 9 9 0 6-3.5 9.7-16.4 20.2l-.6.5zM17 12c-3.9 0-7 3.1-7 7 0 5.1 3.2 8.5 15 18.1 11.8-9.6 15-13 15-18.1 0-3.9-3.1-7-7-7-3.5 0-5.4 2.1-6.9 3.8L25 17.1l-1.1-1.3C22.4 14.1 20.5 12 17 12z"></path></svg>
+    Like
+    
+  </span><span>
+    
+  </span><a class="gitment-header-issue-link" href="https://github.com/gileshuang/gileshuang.github.io/issues/2" target="_blank">Issue Page</a></div></div><div><div lang="en-US" class="gitment-container gitment-comments-container"><div class="gitment-comments-empty">No Comment Yet</div></div></div><div><div lang="en-US" class="gitment-container gitment-editor-container">
+      <a class="gitment-editor-avatar" href="https://github.com/login/oauth/authorize?scope=public_repo&amp;redirect_uri=https%3A%2F%2Fblog.systemctl.top%2F2017%2F2017-09-28_set-proxy-for-git-and-ssh-with-socks5%2F&amp;client_id=30408b4f6463ecaf5d87&amp;client_secret=a81c6cda52d080e18f7a49762f625407d50b1815" title="login with GitHub">
+              <svg class="gitment-github-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M25 10c-8.3 0-15 6.7-15 15 0 6.6 4.3 12.2 10.3 14.2.8.1 1-.3 1-.7v-2.6c-4.2.9-5.1-2-5.1-2-.7-1.7-1.7-2.2-1.7-2.2-1.4-.9.1-.9.1-.9 1.5.1 2.3 1.5 2.3 1.5 1.3 2.3 3.5 1.6 4.4 1.2.1-1 .5-1.6 1-2-3.3-.4-6.8-1.7-6.8-7.4 0-1.6.6-3 1.5-4-.2-.4-.7-1.9.1-4 0 0 1.3-.4 4.1 1.5 1.2-.3 2.5-.5 3.8-.5 1.3 0 2.6.2 3.8.5 2.9-1.9 4.1-1.5 4.1-1.5.8 2.1.3 3.6.1 4 1 1 1.5 2.4 1.5 4 0 5.8-3.5 7-6.8 7.4.5.5 1 1.4 1 2.8v4.1c0 .4.3.9 1 .7 6-2 10.2-7.6 10.2-14.2C40 16.7 33.3 10 25 10z"></path></svg>
+            </a>
+    
+    <div class="gitment-editor-main">
+      <div class="gitment-editor-header">
+        <nav class="gitment-editor-tabs">
+          <button class="gitment-editor-tab gitment-selected">Write</button>
+          <button class="gitment-editor-tab">Preview</button>
+        </nav>
+        <div class="gitment-editor-login">
+          <a class="gitment-editor-login-link" href="https://github.com/login/oauth/authorize?scope=public_repo&amp;redirect_uri=https%3A%2F%2Fblog.systemctl.top%2F2017%2F2017-09-28_set-proxy-for-git-and-ssh-with-socks5%2F&amp;client_id=30408b4f6463ecaf5d87&amp;client_secret=a81c6cda52d080e18f7a49762f625407d50b1815">Login</a> with GitHub
+        </div>
+      </div>
+      <div class="gitment-editor-body">
+        <div class="gitment-editor-write-field">
+          <textarea placeholder="Leave a comment" title="Login to Comment" disabled=""></textarea>
+        </div>
+        <div class="gitment-editor-preview-field gitment-hidden">
+          <div class="gitment-editor-preview gitment-markdown"></div>
+        </div>
+      </div>
+    </div>
+    <div class="gitment-editor-footer">
+      <a class="gitment-editor-footer-tip" href="https://guides.github.com/features/mastering-markdown/" target="_blank">
+        Styling with Markdown is supported
+      </a>
+      <button class="gitment-editor-submit" title="Login to Comment" disabled="">Comment</button>
+    </div>
+  </div></div><div><div lang="en-US" class="gitment-container gitment-footer-container">
+    Powered by
+    <a class="gitment-footer-project-link" href="https://github.com/imsun/gitment" target="_blank">
+      Gitment
+    </a>
+  </div></div></div></div>
+          <link rel="stylesheet" href="./[整理]为 git 和 ssh 设置 socks5 协议的代理_files/default.css">
+          <script src="./[整理]为 git 和 ssh 设置 socks5 协议的代理_files/gitment.browser.js"></script>
+          <script>
+            var gitment = new Gitment({
+              id: "\/2017\/2017-09-28_set-proxy-for-git-and-ssh-with-socks5\/", 
+              owner: "gileshuang", 
+              repo: "gileshuang.github.io", 
+              oauth: {
+                client_id: "30408b4f6463ecaf5d87",
+                client_secret: "a81c6cda52d080e18f7a49762f625407d50b1815",
+                  },
+                })
+            gitment.render('gitment')
+          </script>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s3 m1">
+      
+        <a class="btn-floating btn-large waves-effect waves-light" href="https://blog.systemctl.top/2017/2017-04-14_something-about-lsattr_-i_-e/"><i class="mdi-navigation-arrow-back"></i></a>
+      
+      </div>
+      <div class="col s6 m10 center">&nbsp;</div>
+      <div class="col s3 m1">
+      
+        <a class="btn-floating btn-large waves-effect waves-light" href="https://blog.systemctl.top/2017/2017-12-23_policy-routing-with-systemd-networkd/"><i class="mdi-navigation-arrow-forward"></i></a>
+      
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  <footer class="page-footer">
+    <div class="footer-copyright">
+      <div class="container">
+      © 2015 Copyleft Text
+      <div class="right">Design <a class="grey-text text-lighten-4" href="http://pdevty.github.io/blog/">pdevty</a></div>
+      </div>
+    </div>
+  </footer>
+  <script src="./[整理]为 git 和 ssh 设置 socks5 协议的代理_files/jquery-2.1.4.min.js"></script>
+  <script src="./[整理]为 git 和 ssh 设置 socks5 协议的代理_files/canvas-nest.min.1.0.1.js"></script><canvas id="c_n4" width="1366" height="588" style="position: fixed; top: 0px; left: 0px; z-index: -1; opacity: 0.5;"></canvas>
+  <script src="./[整理]为 git 和 ssh 设置 socks5 协议的代理_files/init.js"></script>
+  <script src="./[整理]为 git 和 ssh 设置 socks5 协议的代理_files/highlight.pack.js"></script>
+  <script src="./[整理]为 git 和 ssh 设置 socks5 协议的代理_files/materialize.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+  
+
+
+<div class="drag-target" style="left: 0px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div><div class="hiddendiv common"></div><audio controls="controls" style="display: none;"></audio></body><style type="text/css">#yddContainer{display:block;font-family:Microsoft YaHei;position:relative;width:100%;height:100%;top:-4px;left:-4px;font-size:12px;border:1px solid}#yddTop{display:block;height:22px}#yddTopBorderlr{display:block;position:static;height:17px;padding:2px 28px;line-height:17px;font-size:12px;color:#5079bb;font-weight:bold;border-style:none solid;border-width:1px}#yddTopBorderlr .ydd-sp{position:absolute;top:2px;height:0;overflow:hidden}.ydd-icon{left:5px;width:17px;padding:0px 0px 0px 0px;padding-top:17px;background-position:-16px -44px}.ydd-close{right:5px;width:16px;padding-top:16px;background-position:left -44px}#yddKeyTitle{float:left;text-decoration:none}#yddMiddle{display:block;margin-bottom:10px}.ydd-tabs{display:block;margin:5px 0;padding:0 5px;height:18px;border-bottom:1px solid}.ydd-tab{display:block;float:left;height:18px;margin:0 5px -1px 0;padding:0 4px;line-height:18px;border:1px solid;border-bottom:none}.ydd-trans-container{display:block;line-height:160%}.ydd-trans-container a{text-decoration:none;}#yddBottom{position:absolute;bottom:0;left:0;width:100%;height:22px;line-height:22px;overflow:hidden;background-position:left -22px}.ydd-padding010{padding:0 10px}#yddWrapper{color:#252525;z-index:10001;background:url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ab20.png);}#yddContainer{background:#fff;border-color:#4b7598}#yddTopBorderlr{border-color:#f0f8fc}#yddWrapper .ydd-sp{background-image:url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ydd-sprite.png)}#yddWrapper a,#yddWrapper a:hover,#yddWrapper a:visited{color:#50799b}#yddWrapper .ydd-tabs{color:#959595}.ydd-tabs,.ydd-tab{background:#fff;border-color:#d5e7f3}#yddBottom{color:#363636}#yddWrapper{min-width:250px;max-width:400px;}</style></html>
